@@ -119,6 +119,7 @@ footer, header, hgroup, menu, nav, section {
 .leiaMais {
   background-color: #007ed9;
   border-radius: 5px;
+  font-size: 15px;
   padding: 0 7px;
   color: white;
   line-height: 1.46667em;
@@ -127,14 +128,14 @@ footer, header, hgroup, menu, nav, section {
   clear: left;
   height: auto; }
 
-/* line 106, ../sass/style.sass */
+/* line 107, ../sass/style.sass */
 hr.dotLine {
   height: 0;
   border: 0;
   border-top: 1px dotted #999999;
   margin: 1.46667em 10px 1.4em; }
 
-/* line 112, ../sass/style.sass */
+/* line 113, ../sass/style.sass */
 hr {
   border: 0;
   border-top: 1px dashed #777777;
@@ -142,89 +143,89 @@ hr {
 
 /* ================================================================== */
 /* ------------------------------------------------------------------ */
-/* line 120, ../sass/style.sass */
+/* line 121, ../sass/style.sass */
 body {
   font: 15px/22px "Open Sans", calibri, sans-serif, "arial";
   background-color: #d8dad5;
   color: #111111; }
 
-/* line 125, ../sass/style.sass */
+/* line 126, ../sass/style.sass */
 img {
   max-width: 100%; }
 
 /* ============================== */
 /* Text Attributes */
 /* ============================== */
-/* line 132, ../sass/style.sass */
+/* line 133, ../sass/style.sass */
 .blueLink {
   color: #0099ff;
   text-decoration: underline; }
 
-/* line 136, ../sass/style.sass */
+/* line 137, ../sass/style.sass */
 .blueLink:hover {
   color: deepskyblue; }
 
-/* line 139, ../sass/style.sass */
+/* line 140, ../sass/style.sass */
 p::-moz-selection,
 ::selection {
   color: #8cc63f;
   background: #222222; }
 
-/* line 144, ../sass/style.sass */
+/* line 145, ../sass/style.sass */
 p {
   margin-bottom: 1.46667em;
   line-height: 1.46667em; }
 
-/* line 148, ../sass/style.sass */
+/* line 149, ../sass/style.sass */
 h1, h2, h3 {
   font-family: "Yanone Kaffeesatz", calibri, sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.06em; }
-  /* line 153, ../sass/style.sass */
+  /* line 154, ../sass/style.sass */
   h1 a, h2 a, h3 a {
     color: inherit;
     display: inline-block;
     text-decoration: none; }
-    /* line 157, ../sass/style.sass */
+    /* line 158, ../sass/style.sass */
     h1 a:visited, h2 a:visited, h3 a:visited {
       color: #660099; }
-    /* line 159, ../sass/style.sass */
+    /* line 160, ../sass/style.sass */
     h1 a:hover, h2 a:hover, h3 a:hover {
       color: black;
       background-color: #eef5da; }
-    /* line 162, ../sass/style.sass */
+    /* line 163, ../sass/style.sass */
     h1 a:active, h2 a:active, h3 a:active {
       background-color: transparent; }
 
-/* line 165, ../sass/style.sass */
+/* line 166, ../sass/style.sass */
 h1 {
   font-size: 3em;
   line-height: 0.97778em;
   margin-bottom: 0.48889em; }
 
-/* line 170, ../sass/style.sass */
+/* line 171, ../sass/style.sass */
 h2 {
   font-size: 2.7em;
   line-height: 1.08642em;
   margin-bottom: 0.54321em; }
-  /* line 174, ../sass/style.sass */
+  /* line 175, ../sass/style.sass */
   h2 .orangeDot {
     padding-left: 20px;
     background: url("../images/icon-sprite-1.png") -35px -585px no-repeat; }
-  /* line 177, ../sass/style.sass */
+  /* line 178, ../sass/style.sass */
   h2 .blueDot {
     padding-left: 20px;
     background: url("../images/icon-sprite-1.png") -35px -665px no-repeat; }
 
-/* line 181, ../sass/style.sass */
+/* line 182, ../sass/style.sass */
 h3 {
   font-size: 2.2em;
   line-height: 1.3335em;
   margin-bottom: 0.66667em;
   letter-spacing: 0.06em; }
 
-/* line 187, ../sass/style.sass */
+/* line 188, ../sass/style.sass */
 h4 {
   font-family: "Open Sans", calibri, sans-serif;
   font-size: 0.8em;
@@ -235,7 +236,7 @@ h4 {
 /* =================================== */
 /* form elements */
 /* =================================== */
-/* line 198, ../sass/style.sass */
+/* line 199, ../sass/style.sass */
 input, select {
   border-radius: 5px;
   border: 0;
@@ -243,15 +244,15 @@ input, select {
   height: 30px;
   font: 16px/30px "medium", arial; }
 
-/* line 205, ../sass/style.sass */
+/* line 206, ../sass/style.sass */
 input {
   padding: 0 10px; }
 
-/* line 208, ../sass/style.sass */
+/* line 209, ../sass/style.sass */
 select {
   padding-left: 10px; }
 
-/* line 211, ../sass/style.sass */
+/* line 212, ../sass/style.sass */
 input.formButton {
   width: auto !important;
   min-width: 0;
@@ -265,7 +266,7 @@ input.formButton {
   -o-transition: background-color 0.2s ease-in;
   transition: background-color 0.2s ease-in; }
 
-/* line 225, ../sass/style.sass */
+/* line 226, ../sass/style.sass */
 input.formButton:hover {
   background-color: #93e55c;
   text-shadow: 0 0 10px black;
@@ -276,43 +277,43 @@ input.formButton:hover {
   -o-transition: background-color 0.1s ease-in;
   transition: background-color 0.1s ease-in; }
 
-/* line 236, ../sass/style.sass */
+/* line 237, ../sass/style.sass */
 #btnConfig {
   background-position: 20px -90px; }
 
-/* line 239, ../sass/style.sass */
+/* line 240, ../sass/style.sass */
 #btnSair {
   background-position: -8px -10px; }
 
 /* form login header ----------------- */
-/* line 245, ../sass/style.sass */
+/* line 246, ../sass/style.sass */
 #hFormLogin {
   line-height: 80px;
   float: right; }
 
-/* line 249, ../sass/style.sass */
+/* line 250, ../sass/style.sass */
 #hFormLogin label {
   padding-right: 10px; }
 
-/* line 252, ../sass/style.sass */
+/* line 253, ../sass/style.sass */
 #hFormLogin li {
   position: relative;
   float: left;
   margin-right: 20px; }
 
-/* line 257, ../sass/style.sass */
+/* line 258, ../sass/style.sass */
 #hFormLogin input {
   width: 100px; }
 
-/* line 260, ../sass/style.sass */
+/* line 261, ../sass/style.sass */
 #hFormLogin #selUnidades {
   width: 200px; }
 
-/* line 263, ../sass/style.sass */
+/* line 264, ../sass/style.sass */
 #hFormLogin .loader {
   margin: 0 0 -3px 4px; }
 
-/* line 266, ../sass/style.sass */
+/* line 267, ../sass/style.sass */
 #hFormLogin .popup {
   position: absolute;
   bottom: -30px;
@@ -321,7 +322,7 @@ input.formButton:hover {
 /* ================================== */
 /* Date */
 /* ================================== */
-/* line 275, ../sass/style.sass */
+/* line 276, ../sass/style.sass */
 .date {
   font-size: 0.8em;
   color: #666666;
@@ -329,13 +330,13 @@ input.formButton:hover {
   display: inline-block;
   margin: -3px 0 3px;
   padding-bottom: 1.834em; }
-  /* line 283, ../sass/style.sass */
+  /* line 284, ../sass/style.sass */
   .date a {
     display: inline-block; }
-  /* line 285, ../sass/style.sass */
+  /* line 286, ../sass/style.sass */
   .lt-ie8 .date {
     float: left; }
-  /* line 287, ../sass/style.sass */
+  /* line 288, ../sass/style.sass */
   .date strong {
     color: black;
     margin-right: 1px;
@@ -348,7 +349,7 @@ input.formButton:hover {
     height: 26px; }
 
 /* MAIN STYLE ============================ */
-/* line 302, ../sass/style.sass */
+/* line 303, ../sass/style.sass */
 #mainContainer {
   padding-bottom: 100px;
   /* ================================== */
@@ -360,51 +361,51 @@ input.formButton:hover {
   /* ================================== */
   /* footer */
   /* ================================== */ }
-  /* line 307, ../sass/style.sass */
+  /* line 308, ../sass/style.sass */
   #mainContainer #mainHeader {
     height: 88px;
     width: 100%;
     background-color: #191919;
     color: white; }
-    /* line 313, ../sass/style.sass */
+    /* line 314, ../sass/style.sass */
     #mainContainer #mainHeader #mHeaderIn {
       width: 980px;
       margin: 0 auto; }
-      /* line 317, ../sass/style.sass */
+      /* line 318, ../sass/style.sass */
       #mainContainer #mainHeader #mHeaderIn #logoMicrocamp {
         float: left;
         height: 35px;
         margin: 22px 0 0 20px; }
-      /* line 321, ../sass/style.sass */
+      /* line 322, ../sass/style.sass */
       #mainContainer #mainHeader #mHeaderIn section#userInfo {
         float: left;
         margin-left: 40px; }
-        /* line 325, ../sass/style.sass */
+        /* line 326, ../sass/style.sass */
         #mainContainer #mainHeader #mHeaderIn section#userInfo #userPhoto {
           float: left;
           display: block;
           line-height: 0; }
-        /* line 329, ../sass/style.sass */
+        /* line 330, ../sass/style.sass */
         #mainContainer #mainHeader #mHeaderIn section#userInfo table#uInfo {
           float: left;
           border-top: 5px solid #8cc63f;
           width: 360px;
           font: 13px/18px "bold";
           color: white; }
-          /* line 335, ../sass/style.sass */
+          /* line 336, ../sass/style.sass */
           #mainContainer #mainHeader #mHeaderIn section#userInfo table#uInfo td {
             position: relative;
             top: 10px;
             padding-left: 20px;
             height: 18px; }
-      /* line 340, ../sass/style.sass */
+      /* line 341, ../sass/style.sass */
       #mainContainer #mainHeader #mHeaderIn ul#topConfig {
         float: right;
         margin-right: 20px; }
-        /* line 343, ../sass/style.sass */
+        /* line 344, ../sass/style.sass */
         #mainContainer #mainHeader #mHeaderIn ul#topConfig li {
           float: left; }
-        /* line 345, ../sass/style.sass */
+        /* line 346, ../sass/style.sass */
         #mainContainer #mainHeader #mHeaderIn ul#topConfig a {
           float: left;
           text-align: center;
@@ -422,7 +423,7 @@ input.formButton:hover {
           -moz-transition: all 0.2s ease-in;
           -o-transition: all 0.2s ease-in;
           transition: all 0.2s ease-in; }
-          /* line 363, ../sass/style.sass */
+          /* line 364, ../sass/style.sass */
           #mainContainer #mainHeader #mHeaderIn ul#topConfig a:hover {
             opacity: 1;
             background-color: #242424;
@@ -431,7 +432,7 @@ input.formButton:hover {
             -moz-transition: all 0.1s ease-in;
             -o-transition: all 0.1s ease-in;
             transition: all 0.1s ease-in; }
-          /* line 372, ../sass/style.sass */
+          /* line 373, ../sass/style.sass */
           #mainContainer #mainHeader #mHeaderIn ul#topConfig a:active {
             background-color: #111111;
             /* transition */
@@ -439,10 +440,10 @@ input.formButton:hover {
             -moz-transition: all 0;
             -o-transition: all 0;
             transition: all 0; }
-        /* line 380, ../sass/style.sass */
+        /* line 381, ../sass/style.sass */
         #mainContainer #mainHeader #mHeaderIn ul#topConfig #btnConfig, #mainContainer #mainHeader #mHeaderIn ul#topConfig #btnSair {
           background-image: url("../images/icon-sprite-1.png"); }
-  /* line 385, ../sass/style.sass */
+  /* line 386, ../sass/style.sass */
   #mainContainer #content {
     width: 980px;
     padding-top: 66px;
@@ -456,14 +457,14 @@ input.formButton:hover {
     /* ================================== */
     /* Right Sidebar */
     /* ================================== */ }
-    /* line 392, ../sass/style.sass */
+    /* line 393, ../sass/style.sass */
     #mainContainer #content aside#navSidebar {
       margin-left: 20px;
       float: left; }
-      /* line 397, ../sass/style.sass */
+      /* line 398, ../sass/style.sass */
       #mainContainer #content aside#navSidebar .navMenu li {
         background-color: #f2f2f2; }
-        /* line 399, ../sass/style.sass */
+        /* line 400, ../sass/style.sass */
         #mainContainer #content aside#navSidebar .navMenu li a {
           display: block;
           margin-bottom: 1px;
@@ -478,7 +479,7 @@ input.formButton:hover {
           -moz-transition: color 0.2s ease-in, border-left-color 0.2s ease-in, background 0.2s ease-in;
           -o-transition: color 0.2s ease-in, border-left-color 0.2s ease-in, background 0.2s ease-in;
           transition: color 0.2s ease-in, border-left-color 0.2s ease-in, background 0.2s ease-in; }
-          /* line 415, ../sass/style.sass */
+          /* line 416, ../sass/style.sass */
           #mainContainer #content aside#navSidebar .navMenu li a:hover {
             color: #333333;
             border-left-color: #8cc63f;
@@ -487,7 +488,7 @@ input.formButton:hover {
             -moz-transition: border-left-color 0.1s ease, color 0.1s ease, background-color 0.2s ease-in, background-position 0.2s ease-out;
             -o-transition: border-left-color 0.1s ease, color 0.1s ease, background-color 0.2s ease-in, background-position 0.2s ease-out;
             transition: border-left-color 0.1s ease, color 0.1s ease, background-color 0.2s ease-in, background-position 0.2s ease-out; }
-          /* line 424, ../sass/style.sass */
+          /* line 425, ../sass/style.sass */
           #mainContainer #content aside#navSidebar .navMenu li a:active {
             background-color: white;
             background-position: 124px -179px;
@@ -495,69 +496,70 @@ input.formButton:hover {
             -moz-transition: border-left-color 0.1s ease, background-color 0s ease-in, background-position 0.1s ease;
             -o-transition: border-left-color 0.1s ease, background-color 0s ease-in, background-position 0.1s ease;
             transition: border-left-color 0.1s ease, background-color 0s ease-in, background-position 0.1s ease; }
-      /* line 432, ../sass/style.sass */
+      /* line 433, ../sass/style.sass */
       #mainContainer #content aside#navSidebar #mainNav li {
         background-image: url("../images/icon-sprite-1.png");
         background-position: 18px 0;
         background-repeat: no-repeat; }
-      /* line 436, ../sass/style.sass */
+      /* line 437, ../sass/style.sass */
       #mainContainer #content aside#navSidebar #mainNav a {
         padding-left: 10px;
         width: 165px; }
-      /* line 439, ../sass/style.sass */
+      /* line 440, ../sass/style.sass */
       #mainContainer #content aside#navSidebar #subNav {
         float: right; }
-        /* line 441, ../sass/style.sass */
+        /* line 442, ../sass/style.sass */
         #mainContainer #content aside#navSidebar #subNav a {
           padding-left: 10px;
           width: 145px; }
-          /* line 444, ../sass/style.sass */
+          /* line 445, ../sass/style.sass */
           #mainContainer #content aside#navSidebar #subNav a:hover {
             background-position: 97px -179px; }
-          /* line 446, ../sass/style.sass */
+          /* line 447, ../sass/style.sass */
           #mainContainer #content aside#navSidebar #subNav a:active {
             background-position: 104px -179px; }
-    /* line 451, ../sass/style.sass */
+    /* line 452, ../sass/style.sass */
     #mainContainer #content #meio {
       float: left;
       width: 480px;
       padding: 1.46667em 20px;
       background-color: white;
       /* excerpt */ }
-      /* line 461, ../sass/style.sass */
+      /* line 462, ../sass/style.sass */
       #mainContainer #content #meio .excerpt-article .excerpt-info {
         margin-bottom: 1.46667em;
         width: 100%; }
-        /* line 464, ../sass/style.sass */
+        /* line 465, ../sass/style.sass */
         #mainContainer #content #meio .excerpt-article .excerpt-info .date {
           padding-bottom: 0; }
-        /* line 466, ../sass/style.sass */
+        /* line 467, ../sass/style.sass */
         #mainContainer #content #meio .excerpt-article .excerpt-info .cat {
           margin-left: 1.46667em; }
-      /* line 468, ../sass/style.sass */
+      /* line 469, ../sass/style.sass */
       #mainContainer #content #meio .excerpt-article .excerpt-thumb {
         display: block;
         line-height: 0;
         margin-bottom: 1.46667em; }
-      /* line 472, ../sass/style.sass */
+      /* line 473, ../sass/style.sass */
       #mainContainer #content #meio hr {
         margin-top: 1.46667em; }
-    /* line 477, ../sass/style.sass */
+    /* line 478, ../sass/style.sass */
     #mainContainer #content div#rightSideBar {
       width: 220px;
       padding: 0 20px;
       float: right; }
-      /* line 481, ../sass/style.sass */
+      /* line 482, ../sass/style.sass */
       #mainContainer #content div#rightSideBar p {
-        font-size: 13px;
-        margin-bottom: 10px; }
-      /* line 484, ../sass/style.sass */
+        font-size: 0.85em;
+        line-height: 1.726em;
+        margin-bottom: 1.726em; }
+      /* line 486, ../sass/style.sass */
       #mainContainer #content div#rightSideBar h4 {
         margin-bottom: 0; }
-      /* line 490, ../sass/style.sass */
+      /* line 492, ../sass/style.sass */
       #mainContainer #content div#rightSideBar ul#bannersList li {
         background-color: black; }
-      /* line 492, ../sass/style.sass */
+      /* line 494, ../sass/style.sass */
       #mainContainer #content div#rightSideBar ul#bannersList a {
         display: block;
         border: 1px solid #bbbbbb;
@@ -569,14 +571,14 @@ input.formButton:hover {
         -moz-transition: all 0.3s ease;
         -o-transition: all 0.3s ease;
         transition: all 0.3s ease; }
-        /* line 505, ../sass/style.sass */
+        /* line 507, ../sass/style.sass */
         #mainContainer #content div#rightSideBar ul#bannersList a:hover {
           opacity: 0.8;
           -webkit-transition: all 0.1s ease;
           -moz-transition: all 0.1s ease;
           -o-transition: all 0.1s ease;
           transition: all 0.1s ease; }
-        /* line 513, ../sass/style.sass */
+        /* line 515, ../sass/style.sass */
         #mainContainer #content div#rightSideBar ul#bannersList a:active {
           opacity: 1;
           border-color: white;
@@ -584,11 +586,11 @@ input.formButton:hover {
           -moz-transition: all 0 ease;
           -o-transition: all 0 ease;
           transition: all 0 ease; }
-      /* line 521, ../sass/style.sass */
+      /* line 523, ../sass/style.sass */
       #mainContainer #content div#rightSideBar #fbLikeBox {
         background-color: white;
         border-top: 4px solid #315c99; }
-  /* line 527, ../sass/style.sass */
+  /* line 529, ../sass/style.sass */
   #mainContainer footer#main {
     position: fixed;
     bottom: 0;
@@ -597,23 +599,23 @@ input.formButton:hover {
     height: 60px;
     background-color: #111111;
     color: white; }
-    /* line 535, ../sass/style.sass */
+    /* line 537, ../sass/style.sass */
     #mainContainer footer#main #fooIn {
       width: 940px;
       margin: 0 auto; }
-      /* line 538, ../sass/style.sass */
+      /* line 540, ../sass/style.sass */
       #mainContainer footer#main #fooIn p {
         line-height: 70px;
         margin: 0; }
-      /* line 541, ../sass/style.sass */
+      /* line 543, ../sass/style.sass */
       #mainContainer footer#main #fooIn ul#fooIcons {
         margin-left: 40px;
         float: left; }
-        /* line 544, ../sass/style.sass */
+        /* line 546, ../sass/style.sass */
         #mainContainer footer#main #fooIn ul#fooIcons li {
           float: left;
           /* icon footer */ }
-          /* line 546, ../sass/style.sass */
+          /* line 548, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a {
             background-image: url("../images/icon-sprite-2.png");
             display: block;
@@ -628,7 +630,7 @@ input.formButton:hover {
             -moz-transition: background-color 0.2s ease-in;
             -o-transition: background-color 0.2s ease-in;
             transition: background-color 0.2s ease-in; }
-            /* line 562, ../sass/style.sass */
+            /* line 564, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a:hover {
               background-color: #191919;
               /* transition */
@@ -636,7 +638,7 @@ input.formButton:hover {
               -moz-transition: background-color 0.1s ease-in;
               -o-transition: background-color 0.1s ease-in;
               transition: background-color 0.1s ease-in; }
-            /* line 571, ../sass/style.sass */
+            /* line 573, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a:active {
               background-color: #060606;
               /* transition */
@@ -644,45 +646,45 @@ input.formButton:hover {
               -moz-transition: background-color 0;
               -o-transition: background-color 0;
               transition: background-color 0; }
-          /* line 580, ../sass/style.sass */
+          /* line 582, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoMcsp {
             background-position: 0 -88px; }
-            /* line 582, ../sass/style.sass */
+            /* line 584, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoMcsp:hover {
               background-position: 0 -9px; }
-          /* line 584, ../sass/style.sass */
+          /* line 586, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoWeb {
             background-position: 0 -248px; }
-            /* line 586, ../sass/style.sass */
+            /* line 588, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoWeb:hover {
               background-position: 0 -168px; }
-          /* line 588, ../sass/style.sass */
+          /* line 590, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoInf {
             background-position: 0 -408px; }
-            /* line 590, ../sass/style.sass */
+            /* line 592, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoInf:hover {
               background-position: 0 -328px; }
-          /* line 592, ../sass/style.sass */
+          /* line 594, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoTI {
             background-position: 0 -568px; }
-            /* line 594, ../sass/style.sass */
+            /* line 596, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoTI:hover {
               background-position: 0 -488px; }
-          /* line 596, ../sass/style.sass */
+          /* line 598, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoABC {
             background-position: 0 -728px; }
-            /* line 598, ../sass/style.sass */
+            /* line 600, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoABC:hover {
               background-position: 0 -648px; }
-          /* line 600, ../sass/style.sass */
+          /* line 602, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoHard {
             background-position: 0 -888px; }
-            /* line 602, ../sass/style.sass */
+            /* line 604, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoHard:hover {
               background-position: 0 -808px; }
 
 /* popup */
-/* line 618, ../sass/style.sass */
+/* line 620, ../sass/style.sass */
 .popup {
   display: none;
   background-color: white;
@@ -691,12 +693,12 @@ input.formButton:hover {
   line-height: 1;
   border-radius: 5px; }
 
-/* line 625, ../sass/style.sass */
+/* line 627, ../sass/style.sass */
 .popup div {
   white-space: nowrap;
   position: relative; }
 
-/* line 628, ../sass/style.sass */
+/* line 630, ../sass/style.sass */
 .popup .arrowTop {
   width: 18px;
   height: 8px;
@@ -715,13 +717,13 @@ input.formButton:hover {
  * 2. The use of `table` rather than `block` is only necessary if using
  *    `:before` to contain the top-margins of child elements.
  */
-/* line 646, ../sass/style.sass */
+/* line 648, ../sass/style.sass */
 .cf:before,
 .cf:after {
   content: " ";
   display: table; }
 
-/* line 652, ../sass/style.sass */
+/* line 654, ../sass/style.sass */
 .cf:after {
   clear: both; }
 
@@ -729,6 +731,6 @@ input.formButton:hover {
  * For IE 6/7 only
  * Include this rule to trigger hasLayout and contain floats.
  */
-/* line 660, ../sass/style.sass */
+/* line 662, ../sass/style.sass */
 .cf {
   *zoom: 1; }

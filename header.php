@@ -32,7 +32,7 @@
 <html>
 <!--<![endif]-->
 	<head>
-		<meta charset="ISO-88859-1" />
+		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>Área dos Alunos</title>
 		

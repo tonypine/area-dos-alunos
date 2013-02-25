@@ -13,8 +13,10 @@
 					echo "<h3 class='orangeDot'>Próximo evento</h3>";
 					echo "<a class='aThumb' href='".get_permalink()."'>".get_the_post_thumbnail( $post_id = get_the_ID(), $size = 'excerpt-event-thumb')."</a>";
 					echo "<h4><a href='".get_permalink()."'>".get_the_title()."</a></h4>";
-					echo "<p>".get_the_excerpt()."</p>";
+					echo get_the_excerpt();
+					echo "<p>";
 					echo "<a class='leiaMais' href='".get_permalink()."''>continuar lendo →</a>";
+					echo "</p>";
 				endwhile;
 			 ?>
 		</aside>
