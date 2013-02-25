@@ -1,18 +1,29 @@
 	
 	<div id="rightSideBar">
 		<aside id="aEvento">
-			<h2 class="orangeDot">Próximo evento</h2>
-			<a href="#"><img src="images/evento.jpg" /></a>
-			<h3>Microcamp SP premia os melhores professores e alunos</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna...</p>
-			<a class="blueLink" href="#">ler +</a>
+			<?php
+				$eventArgs = array(
+						'post_type'			=>	'post',
+						'category_name'		=>	'eventos',
+						'posts_per_page'	=>	'1'
+					);
+				$eventQuery = new WP_Query( $eventArgs );
+				//dump($eventQuery);	
+				while ($eventQuery->have_posts()): $eventQuery->the_post();
+					echo "<h3 class='orangeDot'>Próximo evento</h3>";
+					echo "<a class='aThumb' href='".get_permalink()."'>".get_the_post_thumbnail( $post_id = get_the_ID(), $size = 'excerpt-event-thumb')."</a>";
+					echo "<h4><a href='".get_permalink()."'>".get_the_title()."</a></h4>";
+					echo "<p>".get_the_excerpt()."</p>";
+					echo "<a class='leiaMais' href='".get_permalink()."''>continuar lendo →</a>";
+				endwhile;
+			 ?>
 		</aside>
 		<hr class="dotLine" />
 		<aside id="acesse">
-			<h2 class="blueDot">Acesse!</h2>
+			<h3 class="blueDot">Acesse!</h3>
 			<ul id="bannersList">
-				<li><a href="#"><img src="images/banners/banner1.png" /></a></li>
-				<li><a href="#"><img src="images/banners/banner2.png" /></a></li>
+				<li><a href="#"><img src="<?php url(); ?>/images/banners/banner1.png" /></a></li>
+				<li><a href="#"><img src="<?php url(); ?>/images/banners/banner2.png" /></a></li>
 			</ul>
 		</aside>
 		<hr class="dotLine" />

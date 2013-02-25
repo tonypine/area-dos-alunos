@@ -4,6 +4,13 @@
 
 add_theme_support( 'post-thumbnails' );
 add_image_size( 'excerpt-thumb', 559, 330);
+add_image_size( 'excerpt-event-thumb', 220, 154, true);
+
+
+register_nav_menus( array(
+	'main' => 'Main Menu',
+	'secundary' => 'Secondary Menu'
+) );
 
 // add feed links to header
 if (function_exists('automatic_feed_links')) {

@@ -18,9 +18,7 @@
 	require_once 'php/aluno.class.php';	
 	$aluno = new aluno(); 
 	
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <!--[if IE 6]>
 <html id="ie6">
 <![endif]-->
@@ -40,9 +38,6 @@
 		
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
 		
-		<!-- GOOGLE FONT -->
-		<link href='http://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:800' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" media="all" href="<?php url(); ?>/css/style.css" />
 		
 		<!-- IE Fix for HTML5 Tags -->
@@ -63,13 +58,13 @@
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));</script>
 		
-		<div id="mainContainer" class="cf">
-			<header id="mainHeader" class="cf">
-				<div id="mHeaderIn" class="cf">
+		<div id="mainContainer">
+			<header id="mainHeader">
+				<div id="mHeaderIn">
 					<a id="logoMicrocamp" href="#"><img src="<?php url(); ?>/images/logo-microcamp-sp.jpg"/></a>
-					<section id="userInfo" class="cf">
+					<section id="userInfo">
 						<div id="userPhoto">
-							<img src="images/userPhoto.jpg" />
+							<img src="<?php url(); ?>/images/userPhoto.jpg" />
 						</div>
 						<table id="uInfo">
 							<tr>

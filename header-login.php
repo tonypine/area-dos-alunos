@@ -19,9 +19,7 @@
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
 		
 		<!-- GOOGLE FONT -->
-		<link href='http://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:800' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" media="all" href="Sistema/Aluno2/css/style.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $base; ?>css/style.css" />
 		
 		<!--[if lt IE 9]>
 		<script src="js/html5.js" type="text/javascript"></script>

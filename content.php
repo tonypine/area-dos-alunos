@@ -13,13 +13,18 @@
 	        $c = array_slice( $c, 0, 5 );	?>
 
             <article class="excerpt-article">
-                <h3><a class="titleLink" href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h3>
+                <h3><a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h3>
                 <div class="excerpt-info">
                     <span class="date"><?php echo get_the_date(); ?></span>
                     <span class="cat">Categoria:
-                    	<?php foreach ($c as $cat) {
-                    		echo "<a href='".get_category_link($cat->term_id )."'>".$cat->name."<a/>";
-                    	} ?>
+                    	<?php 
+                    		$iCat = 0;
+                    		$catLength = (int) sizeof($c);
+                    		foreach ($c as $cat) {
+                    			$iCat++;
+                    			echo "<a href='".get_category_link($cat->term_id )."'>".$cat->name."<a/>";
+                    			if($iCat < $catLength) echo ", ";
+                    		} ?>
                             <!--_.each(p.cat, function (c) { i++; }}
                                 <a href="{{ siteUrl }}/#/categoria/{{ c.slug }}">{{ c.cat_name }}</a>
                                 {{# if(i < p.cat.length) }},
