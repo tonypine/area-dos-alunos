@@ -2,31 +2,47 @@
 	
 	
 	class aluno {
+
+		// global
+		public $codUnidade 	= null;
+		public $codCurso 	= null;
+		public $ctr 		= null;
 		
 		public $info = null;		
-		public $fields = Array(
+		public $aFields = Array(
 			'Nome',
 			'CodTurma',
 			'DataNascimento'
 		);
+
+		public $modulos = null;		
+		public $modFields = Array(
+			'TAB00207.CodModulo AS CodModulo', 
+			'TAB00212.Descricao AS Descricao'
+		);
+
 		public $freq = array();
 		
 		public function __construct() {
+			$this->codUnidade 	= $_SESSION['Unidade'];
+			$this->codCurso 	= $_SESSION['CodCurso'];
+			$this->ctr 			= $_SESSION['Ctr'];
+			
 			$this->getAluno();
 			$this->storeYearOld();
 		}
 		
 		// busca as informações do aluno
-		function getAluno() {
+		public function getAluno() {
 			
 			// aluno
-			$sql = "SELECT ";
+			$sql  = "SELECT ";
 			//$sql .= '*';
-			$sql .= implode(",", $this->fields); 
+			$sql .= implode(",", $this->aFields); 
 			$sql .= " FROM TAB00200
-					WHERE CodUnidade = '".$_SESSION['Unidade']."'
-					AND CodCurso = '".$_SESSION['CodCurso']."'
-					AND CTR = '".$_SESSION['Ctr']."'";
+					WHERE CodUnidade = '".$this->codUnidade."'
+					AND CodCurso = '".$this->codCurso."'
+					AND CTR = '".$this->ctr."'";
 			
 			$queryAluno = mysql_query($sql) or die ("Erro");
 			
@@ -40,15 +56,32 @@
 			$unidade = $uniNome['Unidade'];
 			
 			$this->info = mysql_fetch_object($queryAluno);
-			$this->info->unidade = $unidade;
+			$this->info->unidade = utf8_encode( $unidade );
 			
 		}
+
+		public function getModulos() {
+
+			$sql  = "SELECT ";
+			$sql .= implode(",", $this->modFields);
+			$sql .= " FROM TAB00207, TAB00212
+					WHERE TAB00207.CodUnidade = '".$this->codUnidade."'
+					AND TAB00207.CodUnidade = TAB00212.CodUnidade
+					AND TAB00207.CodTurma = '".$this->info->CodTurma."'
+					AND TAB00207.CodModulo = TAB00212.CodModulo
+					GROUP BY TAB00212.CodModulo
+					ORDER BY TAB00212.CodModulo ASC";
+
+			$queryModulos = mysql_query( $sql ) or die('Erro ao buscar módulos');
+			$this->modulos = mysql_fetch_object( $queryModulos );
+
+		}
 		
-		function getFreq() {
+		public function getFreq() {
 			
 			// frequencia
 			//$sql = "SELECT ";
-			//$sql .= implode(",", $this->fields); 
+			//$sql .= implode(",", $this->aFields); 
 			$sql = "SELECT 
 						A.DataFalta as data, 
 						C.Modulo as modulo, 
@@ -79,7 +112,7 @@
 			
 		}
 		
-		function storeYearOld() {
+		public function storeYearOld() {
 			
 			$idade = preg_split("/ /", $this->info->DataNascimento);
 			$data_nascimento = strtotime($idade[0]." 00:00:00");

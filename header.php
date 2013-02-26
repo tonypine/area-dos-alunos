@@ -3,9 +3,6 @@
 	// Aluno Class
 
 	session_start();
-	
-	/* Se o usu�rio n�o estiver logado, ent�o ele � redirecionado
-	 * para a p�gina de login */
 	 
 	if($_SESSION['Unidade'] == "" or 
 	$_SESSION['CodCurso'] == "" or 
@@ -32,11 +29,10 @@
 <html>
 <!--<![endif]-->
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">      
+        <meta name="viewport" content="width=device-width">
 		<title>Área dos Alunos</title>
-		
-		<link rel="profile" href="http://gmpg.org/xfn/11" />
 		
 		<link rel="stylesheet" type="text/css" media="all" href="<?php url(); ?>/css/style.css" />
 		
@@ -47,17 +43,10 @@
 	</head>
 
 	<body>
-		
+
 		<!-- facebook -->
 		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
-		
+				
 		<div id="mainContainer">
 			<header id="mainHeader">
 				<div id="mHeaderIn">
@@ -77,7 +66,7 @@
 							</tr>
 							<tr>
 								<td><a href="" class="blueLink">editar perfil</a></td>
-								<td>Unidade: <?php echo utf8_encode( $aluno->info->unidade ); ?></td>
+								<td>Unidade: <?php echo $aluno->info->unidade; ?></td>
 							</tr>
 						</table>
 					</section>
