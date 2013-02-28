@@ -2,41 +2,45 @@
 
 	<div id="content" class="cf">
 		<?php include('sidebar-nav.php'); 
+			session_start();
 			require_once 'php/conexao.php';
+			require_once '/Conexoes/VerificaAlunos.php';
 			require_once 'php/aluno.class.php';	
 			$aluno = new aluno(); ?> 
 		<div id="meio">
             <article class="excerpt-article">
-            	<!-- ================================= -->
-            	<!-- Mostra Notas -->
-            	<!-- ================================= -->
 				<h2>Boletim</h2>
             	<?php
-					session_start();
+            		while(have_posts()): the_post();
+            			the_content();
+            		endwhile;
 
-					//INCLUINDO O VERIFICADOR
-					require_once("/Conexoes/VerificaAlunos.php");
-
+            		$aluno->getAluno();
 					$aluno->getModulos();
 
-					?>
+					/* --------------------- */
+					/* Table of notes
+					/* ------------------- */
+					echo '<table id="listaNotas">';
+					foreach($aluno->modulos as $key => $m):
+						if($m->nota):
+							if($m->nota > 7):
+								$class = 'aprovado';
+							elseif($m->nota < 7):
+								$class = 'reprovado';
+							endif;
+							$nota = $m->nota . ' Pontos';
+						else:
+							$class = '';
+							$nota = "--";
+						endif;
+						echo "<tr class='".$class."'>";
+						echo "<td class='nota'>".$nota."</td><td class='modulo'>".$m->descricao."</td>";
+						echo "</tr>";
+					endforeach;
+					echo '</table>'
+				?>
 
-					<table width="200" border="0" align="center" cellpadding="5" cellspacing="0">
-					<tr>
-
-			
-					<?php
-
-					foreach ($aluno->modulos as $key => $value) {
-						print "$key => $value<br>";
-					}
-
-					?>
-					</tr>
-					</table>
-            	<!-- ================================= -->
-            	<!-- # Mostra Notas -->
-            	<!-- ================================= -->
             </article>
 		</div>
 		<?php include('sidebar-right.php'); ?>

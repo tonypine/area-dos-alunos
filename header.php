@@ -14,6 +14,7 @@
 	require_once 'php/conexao.php';
 	require_once 'php/aluno.class.php';	
 	$aluno = new aluno(); 
+	$aluno->getAluno(); 
 	
 ?><!DOCTYPE html>
 <!--[if IE 6]>
@@ -57,7 +58,7 @@
 						</div>
 						<table id="uInfo">
 							<tr>
-								<td><?php echo ucwords( strtolower( $aluno->info->Nome ) ); ?></td>
+								<td><?php echo ucwords( strtolower( $aluno->info->nome ) ); ?></td>
 								<td>Curso: Informática</td>
 							</tr>
 							<tr>

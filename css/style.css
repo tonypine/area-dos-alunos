@@ -278,37 +278,37 @@ footer, header, hgroup, menu, nav, section {
 /* ============================== */
 /* Mixins & Classes */
 /* ============================== */
-/* line 74, ../sass/style.sass */
+/* line 76, ../sass/style.sass */
 #mainContainer #mainHeader, #mainContainer #mainHeader #mHeaderIn, #mainContainer #mainHeader #mHeaderIn section#userInfo, #mainContainer #content aside#navSidebar .navMenu, #mainContainer #content #meio article, #mainContainer #content #meio #comments .commentlist li .comment-body, #mainContainer #content #meio #comments .commentlist li .comment-body .vcard, #mainContainer #content div#rightSideBar aside {
   *zoom: 1; }
-/* line 76, ../sass/style.sass */
+/* line 78, ../sass/style.sass */
 #mainContainer #mainHeader:before, #mainContainer #mainHeader #mHeaderIn:before, #mainContainer #mainHeader #mHeaderIn section#userInfo:before, #mainContainer #content aside#navSidebar .navMenu:before, #mainContainer #content #meio article:before, #mainContainer #content #meio #comments .commentlist li .comment-body:before, #mainContainer #content #meio #comments .commentlist li .comment-body .vcard:before, #mainContainer #content div#rightSideBar aside:before, #mainContainer #mainHeader:after, #mainContainer #mainHeader #mHeaderIn:after, #mainContainer #mainHeader #mHeaderIn section#userInfo:after, #mainContainer #content aside#navSidebar .navMenu:after, #mainContainer #content #meio article:after, #mainContainer #content #meio #comments .commentlist li .comment-body:after, #mainContainer #content #meio #comments .commentlist li .comment-body .vcard:after, #mainContainer #content div#rightSideBar aside:after {
   content: "";
   display: table; }
-/* line 80, ../sass/style.sass */
+/* line 82, ../sass/style.sass */
 #mainContainer #mainHeader:after, #mainContainer #mainHeader #mHeaderIn:after, #mainContainer #mainHeader #mHeaderIn section#userInfo:after, #mainContainer #content aside#navSidebar .navMenu:after, #mainContainer #content #meio article:after, #mainContainer #content #meio #comments .commentlist li .comment-body:after, #mainContainer #content #meio #comments .commentlist li .comment-body .vcard:after, #mainContainer #content div#rightSideBar aside:after {
   clear: both; }
 
-/* line 83, ../sass/style.sass */
+/* line 85, ../sass/style.sass */
 .hidden {
   visibility: hidden;
   position: absolute;
   z-index: -1; }
 
-/* line 88, ../sass/style.sass */
+/* line 90, ../sass/style.sass */
 .date strong {
   background: url("../img/sprite.png?v=1.1") 0 0 no-repeat; }
 
 /* This way when an Anchor has only a image inside, it get image height and
  * remove additional pad on bottom  */
-/* line 93, ../sass/style.sass */
+/* line 95, ../sass/style.sass */
 .aThumb, #mainContainer #content #meio article .imgAnchor, #mainContainer #content #meio #comments #respond #commentform p.comment-form-comment {
   display: block;
   line-height: 0;
   margin-bottom: 1.46667em; }
 
 /* Leia mais */
-/* line 99, ../sass/style.sass */
+/* line 101, ../sass/style.sass */
 .leiaMais {
   background-color: #007ed9;
   border-radius: 5px;
@@ -321,20 +321,20 @@ footer, header, hgroup, menu, nav, section {
   clear: left;
   height: auto; }
 
-/* line 111, ../sass/style.sass */
+/* line 113, ../sass/style.sass */
 hr.dotLine {
   height: 0;
   border: 0;
   border-top: 1px dotted #999999;
   margin: 1.46667em 10px 1.4em; }
 
-/* line 117, ../sass/style.sass */
+/* line 119, ../sass/style.sass */
 hr {
   border: 0;
   border-top: 1px dashed #777777;
   margin: 0 0 1.4em; }
 
-/* line 122, ../sass/style.sass */
+/* line 124, ../sass/style.sass */
 .button, input[type=submit], #mainContainer #content #meio #comments .commentlist li .comment-body .reply a, #mainContainer #content #meio #comments #respond h3 small a, #mainContainer #content #meio #comments #respond #commentform .form-submit #submit, #mainContainer #content #meio #comments #respond #commentform .form-submit a {
   background-color: #a4cb38;
   padding: 0 0.73334em;
@@ -346,23 +346,23 @@ hr {
   height: 2.2em;
   line-height: 2.2em;
   display: inline-block; }
-  /* line 133, ../sass/style.sass */
+  /* line 135, ../sass/style.sass */
   .button:hover, input[type=submit]:hover, #mainContainer #content #meio #comments .commentlist li .comment-body .reply a:hover, #mainContainer #content #meio #comments #respond h3 small a:hover, #mainContainer #content #meio #comments #respond #commentform .form-submit #submit:hover, #mainContainer #content #meio #comments #respond #commentform .form-submit a:hover {
     background-color: #009647;
     cursor: pointer;
     text-decoration: none; }
-  /* line 137, ../sass/style.sass */
+  /* line 139, ../sass/style.sass */
   .button:active, input[type=submit]:active, #mainContainer #content #meio #comments .commentlist li .comment-body .reply a:active, #mainContainer #content #meio #comments #respond h3 small a:active, #mainContainer #content #meio #comments #respond #commentform .form-submit #submit:active, #mainContainer #content #meio #comments #respond #commentform .form-submit a:active {
     background-color: #00592a; }
 
-/* line 140, ../sass/style.sass */
+/* line 142, ../sass/style.sass */
 input[type=text], input[type=password], textarea {
   border-radius: 5px;
   border: 1px solid #bbbbbb;
   margin: 0.33334em 0;
   font-size: 15px; }
 
-/* line 146, ../sass/style.sass */
+/* line 148, ../sass/style.sass */
 #mainContainer #content #meio #comments .commentlist li .comment-body .commentText, #mainContainer #content #meio #comments #respond #commentform {
   background-color: #f8f8f8;
   border: 1px solid #cccccc;
@@ -370,89 +370,89 @@ input[type=text], input[type=password], textarea {
 
 /* ================================================================== */
 /* ------------------------------------------------------------------ */
-/* line 154, ../sass/style.sass */
+/* line 156, ../sass/style.sass */
 body {
   font: 15px/22px "Open Sans", calibri, sans-serif, "arial";
   background-color: #d8dad5;
   color: #111111; }
 
-/* line 159, ../sass/style.sass */
+/* line 161, ../sass/style.sass */
 img {
   max-width: 100%; }
 
 /* ============================== */
 /* Text Attributes */
 /* ============================== */
-/* line 166, ../sass/style.sass */
+/* line 168, ../sass/style.sass */
 .blueLink {
   color: #0099ff;
   text-decoration: underline; }
 
-/* line 170, ../sass/style.sass */
+/* line 172, ../sass/style.sass */
 .blueLink:hover {
   color: deepskyblue; }
 
-/* line 173, ../sass/style.sass */
+/* line 175, ../sass/style.sass */
 p::-moz-selection,
 ::selection {
   color: #8cc63f;
   background: #222222; }
 
-/* line 178, ../sass/style.sass */
+/* line 180, ../sass/style.sass */
 p {
   margin-bottom: 1.46667em;
   line-height: 1.46667em; }
 
-/* line 182, ../sass/style.sass */
+/* line 184, ../sass/style.sass */
 h1, h2, h3 {
   font-family: "Yanone Kaffeesatz", calibri, sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.06em; }
-  /* line 187, ../sass/style.sass */
+  /* line 189, ../sass/style.sass */
   h1 a, h2 a, h3 a {
     color: inherit;
     display: inline-block;
     text-decoration: none; }
-    /* line 191, ../sass/style.sass */
+    /* line 193, ../sass/style.sass */
     h1 a:visited, h2 a:visited, h3 a:visited {
       color: #660099; }
-    /* line 193, ../sass/style.sass */
+    /* line 195, ../sass/style.sass */
     h1 a:hover, h2 a:hover, h3 a:hover {
       color: black;
       background-color: #eef5da; }
-    /* line 196, ../sass/style.sass */
+    /* line 198, ../sass/style.sass */
     h1 a:active, h2 a:active, h3 a:active {
       background-color: transparent; }
 
-/* line 199, ../sass/style.sass */
+/* line 201, ../sass/style.sass */
 h1 {
   font-size: 3em;
   line-height: 0.97778em;
   margin-bottom: 0.48889em; }
 
-/* line 204, ../sass/style.sass */
+/* line 206, ../sass/style.sass */
 h2 {
   font-size: 2.7em;
   line-height: 1.08642em;
   margin-bottom: 0.54321em; }
-  /* line 208, ../sass/style.sass */
+  /* line 210, ../sass/style.sass */
   h2 .orangeDot {
     padding-left: 20px;
     background: url("../images/icon-sprite-1.png") -35px -585px no-repeat; }
-  /* line 211, ../sass/style.sass */
+  /* line 213, ../sass/style.sass */
   h2 .blueDot {
     padding-left: 20px;
     background: url("../images/icon-sprite-1.png") -35px -665px no-repeat; }
 
-/* line 215, ../sass/style.sass */
+/* line 217, ../sass/style.sass */
 h3 {
   font-size: 2.2em;
   line-height: 1.3335em;
   margin-bottom: 0.66667em;
   letter-spacing: 0.06em; }
 
-/* line 221, ../sass/style.sass */
+/* line 223, ../sass/style.sass */
 h4 {
   font-family: "Yanone Kaffeesatz", calibri, sans-serif;
   font-size: 1.8em;
@@ -463,21 +463,21 @@ h4 {
 /* =================================== */
 /* form elements */
 /* =================================== */
-/* line 233, ../sass/style.sass */
+/* line 235, ../sass/style.sass */
 form label {
   display: block;
   line-height: 1.46667em; }
 
-/* line 237, ../sass/style.sass */
+/* line 239, ../sass/style.sass */
 input, select {
   border-radius: 5px;
   background-color: white; }
 
-/* line 241, ../sass/style.sass */
+/* line 243, ../sass/style.sass */
 select {
   padding-left: 10px; }
 
-/* line 244, ../sass/style.sass */
+/* line 246, ../sass/style.sass */
 input.formButton {
   width: auto !important;
   min-width: 0;
@@ -490,7 +490,7 @@ input.formButton {
   -moz-transition: background-color 0.2s ease-in;
   -o-transition: background-color 0.2s ease-in;
   transition: background-color 0.2s ease-in; }
-  /* line 258, ../sass/style.sass */
+  /* line 260, ../sass/style.sass */
   input.formButton:hover {
     background-color: #93e55c;
     text-shadow: 0 0 10px black;
@@ -501,54 +501,54 @@ input.formButton {
     -o-transition: background-color 0.1s ease-in;
     transition: background-color 0.1s ease-in; }
 
-/* line 269, ../sass/style.sass */
+/* line 271, ../sass/style.sass */
 input[type=text], input[type=password] {
   color: #111111;
   height: 2.13334em;
   line-height: 2.13334em;
   padding: 0 0.73334em; }
 
-/* line 279, ../sass/style.sass */
+/* line 281, ../sass/style.sass */
 textarea {
   padding: 0.73334em; }
 
-/* line 285, ../sass/style.sass */
+/* line 287, ../sass/style.sass */
 #btnConfig {
   background-position: 20px -90px; }
 
-/* line 288, ../sass/style.sass */
+/* line 290, ../sass/style.sass */
 #btnSair {
   background-position: -8px -10px; }
 
 /* form login header ----------------- */
-/* line 294, ../sass/style.sass */
+/* line 296, ../sass/style.sass */
 #hFormLogin {
   line-height: 80px;
   float: right; }
 
-/* line 298, ../sass/style.sass */
+/* line 300, ../sass/style.sass */
 #hFormLogin label {
   padding-right: 10px; }
 
-/* line 301, ../sass/style.sass */
+/* line 303, ../sass/style.sass */
 #hFormLogin li {
   position: relative;
   float: left;
   margin-right: 20px; }
 
-/* line 306, ../sass/style.sass */
+/* line 308, ../sass/style.sass */
 #hFormLogin input {
   width: 100px; }
 
-/* line 309, ../sass/style.sass */
+/* line 311, ../sass/style.sass */
 #hFormLogin #selUnidades {
   width: 200px; }
 
-/* line 312, ../sass/style.sass */
+/* line 314, ../sass/style.sass */
 #hFormLogin .loader {
   margin: 0 0 -3px 4px; }
 
-/* line 315, ../sass/style.sass */
+/* line 317, ../sass/style.sass */
 #hFormLogin .popup {
   position: absolute;
   bottom: -30px;
@@ -557,7 +557,7 @@ textarea {
 /* ================================== */
 /* Date */
 /* ================================== */
-/* line 324, ../sass/style.sass */
+/* line 326, ../sass/style.sass */
 .date {
   font-size: 0.8em;
   color: #666666;
@@ -565,13 +565,13 @@ textarea {
   display: inline-block;
   margin: -3px 0 3px;
   padding-bottom: 1.834em; }
-  /* line 332, ../sass/style.sass */
+  /* line 334, ../sass/style.sass */
   .date a {
     display: inline-block; }
-  /* line 334, ../sass/style.sass */
+  /* line 336, ../sass/style.sass */
   .lt-ie8 .date {
     float: left; }
-  /* line 336, ../sass/style.sass */
+  /* line 338, ../sass/style.sass */
   .date strong {
     color: black;
     margin-right: 1px;
@@ -584,7 +584,7 @@ textarea {
     height: 26px; }
 
 /* MAIN STYLE ============================ */
-/* line 351, ../sass/style.sass */
+/* line 353, ../sass/style.sass */
 #mainContainer {
   padding-bottom: 100px;
   /* ================================== */
@@ -596,51 +596,51 @@ textarea {
   /* ================================== */
   /* footer */
   /* ================================== */ }
-  /* line 356, ../sass/style.sass */
+  /* line 358, ../sass/style.sass */
   #mainContainer #mainHeader {
     height: 88px;
     width: 100%;
     background-color: #191919;
     color: white; }
-    /* line 362, ../sass/style.sass */
+    /* line 364, ../sass/style.sass */
     #mainContainer #mainHeader #mHeaderIn {
       width: 980px;
       margin: 0 auto; }
-      /* line 366, ../sass/style.sass */
+      /* line 368, ../sass/style.sass */
       #mainContainer #mainHeader #mHeaderIn #logoMicrocamp {
         float: left;
         height: 35px;
         margin: 22px 0 0 20px; }
-      /* line 370, ../sass/style.sass */
+      /* line 372, ../sass/style.sass */
       #mainContainer #mainHeader #mHeaderIn section#userInfo {
         float: left;
         margin-left: 40px; }
-        /* line 374, ../sass/style.sass */
+        /* line 376, ../sass/style.sass */
         #mainContainer #mainHeader #mHeaderIn section#userInfo #userPhoto {
           float: left;
           display: block;
           line-height: 0; }
-        /* line 378, ../sass/style.sass */
+        /* line 380, ../sass/style.sass */
         #mainContainer #mainHeader #mHeaderIn section#userInfo table#uInfo {
           float: left;
           border-top: 5px solid #8cc63f;
           width: 360px;
           font: 13px/18px "bold";
           color: white; }
-          /* line 384, ../sass/style.sass */
+          /* line 386, ../sass/style.sass */
           #mainContainer #mainHeader #mHeaderIn section#userInfo table#uInfo td {
             position: relative;
             top: 10px;
             padding-left: 20px;
             height: 18px; }
-      /* line 389, ../sass/style.sass */
+      /* line 391, ../sass/style.sass */
       #mainContainer #mainHeader #mHeaderIn ul#topConfig {
         float: right;
         margin-right: 20px; }
-        /* line 392, ../sass/style.sass */
+        /* line 394, ../sass/style.sass */
         #mainContainer #mainHeader #mHeaderIn ul#topConfig li {
           float: left; }
-        /* line 394, ../sass/style.sass */
+        /* line 396, ../sass/style.sass */
         #mainContainer #mainHeader #mHeaderIn ul#topConfig a {
           float: left;
           text-align: center;
@@ -658,7 +658,7 @@ textarea {
           -moz-transition: all 0.2s ease-in;
           -o-transition: all 0.2s ease-in;
           transition: all 0.2s ease-in; }
-          /* line 412, ../sass/style.sass */
+          /* line 414, ../sass/style.sass */
           #mainContainer #mainHeader #mHeaderIn ul#topConfig a:hover {
             opacity: 1;
             background-color: #242424;
@@ -667,7 +667,7 @@ textarea {
             -moz-transition: all 0.1s ease-in;
             -o-transition: all 0.1s ease-in;
             transition: all 0.1s ease-in; }
-          /* line 421, ../sass/style.sass */
+          /* line 423, ../sass/style.sass */
           #mainContainer #mainHeader #mHeaderIn ul#topConfig a:active {
             background-color: #111111;
             /* transition */
@@ -675,10 +675,10 @@ textarea {
             -moz-transition: all 0;
             -o-transition: all 0;
             transition: all 0; }
-        /* line 429, ../sass/style.sass */
+        /* line 431, ../sass/style.sass */
         #mainContainer #mainHeader #mHeaderIn ul#topConfig #btnConfig, #mainContainer #mainHeader #mHeaderIn ul#topConfig #btnSair {
           background-image: url("../images/icon-sprite-1.png"); }
-  /* line 434, ../sass/style.sass */
+  /* line 436, ../sass/style.sass */
   #mainContainer #content {
     width: 980px;
     padding-top: 66px;
@@ -692,14 +692,14 @@ textarea {
     /* ================================== */
     /* Right Sidebar */
     /* ================================== */ }
-    /* line 441, ../sass/style.sass */
+    /* line 443, ../sass/style.sass */
     #mainContainer #content aside#navSidebar {
       margin-left: 20px;
       float: left; }
-      /* line 446, ../sass/style.sass */
+      /* line 448, ../sass/style.sass */
       #mainContainer #content aside#navSidebar .navMenu li {
         background-color: #f2f2f2; }
-        /* line 448, ../sass/style.sass */
+        /* line 450, ../sass/style.sass */
         #mainContainer #content aside#navSidebar .navMenu li a {
           display: block;
           margin-bottom: 1px;
@@ -714,7 +714,7 @@ textarea {
           -moz-transition: color 0.2s ease-in, border-left-color 0.2s ease-in, background 0.2s ease-in;
           -o-transition: color 0.2s ease-in, border-left-color 0.2s ease-in, background 0.2s ease-in;
           transition: color 0.2s ease-in, border-left-color 0.2s ease-in, background 0.2s ease-in; }
-          /* line 464, ../sass/style.sass */
+          /* line 466, ../sass/style.sass */
           #mainContainer #content aside#navSidebar .navMenu li a:hover {
             color: #333333;
             border-left-color: #8cc63f;
@@ -723,7 +723,7 @@ textarea {
             -moz-transition: border-left-color 0.1s ease, color 0.1s ease, background-color 0.2s ease-in, background-position 0.2s ease-out;
             -o-transition: border-left-color 0.1s ease, color 0.1s ease, background-color 0.2s ease-in, background-position 0.2s ease-out;
             transition: border-left-color 0.1s ease, color 0.1s ease, background-color 0.2s ease-in, background-position 0.2s ease-out; }
-          /* line 473, ../sass/style.sass */
+          /* line 475, ../sass/style.sass */
           #mainContainer #content aside#navSidebar .navMenu li a:active {
             background-color: white;
             background-position: 124px -179px;
@@ -731,140 +731,168 @@ textarea {
             -moz-transition: border-left-color 0.1s ease, background-color 0s ease-in, background-position 0.1s ease;
             -o-transition: border-left-color 0.1s ease, background-color 0s ease-in, background-position 0.1s ease;
             transition: border-left-color 0.1s ease, background-color 0s ease-in, background-position 0.1s ease; }
-      /* line 481, ../sass/style.sass */
+      /* line 483, ../sass/style.sass */
       #mainContainer #content aside#navSidebar #mainNav li {
         background-image: url("../images/icon-sprite-1.png");
         background-position: 18px 0;
         background-repeat: no-repeat; }
-      /* line 485, ../sass/style.sass */
+      /* line 487, ../sass/style.sass */
       #mainContainer #content aside#navSidebar #mainNav a {
         padding-left: 10px;
         width: 165px; }
-      /* line 488, ../sass/style.sass */
+      /* line 490, ../sass/style.sass */
       #mainContainer #content aside#navSidebar #subNav {
         float: right; }
-        /* line 490, ../sass/style.sass */
+        /* line 492, ../sass/style.sass */
         #mainContainer #content aside#navSidebar #subNav a {
           padding-left: 10px;
           width: 145px; }
-          /* line 493, ../sass/style.sass */
+          /* line 495, ../sass/style.sass */
           #mainContainer #content aside#navSidebar #subNav a:hover {
             background-position: 97px -179px; }
-          /* line 495, ../sass/style.sass */
+          /* line 497, ../sass/style.sass */
           #mainContainer #content aside#navSidebar #subNav a:active {
             background-position: 104px -179px; }
-    /* line 500, ../sass/style.sass */
+    /* line 502, ../sass/style.sass */
     #mainContainer #content #meio {
       float: left;
       width: 480px;
       padding: 1.46667em 20px;
       background-color: white;
       /* ------ comments -------- */ }
-      /* line 509, ../sass/style.sass */
+      /* line 511, ../sass/style.sass */
       #mainContainer #content #meio article .excerpt-info {
         margin-bottom: 1.46667em;
         width: 100%; }
-        /* line 512, ../sass/style.sass */
+        /* line 514, ../sass/style.sass */
         #mainContainer #content #meio article .excerpt-info .date {
           padding-bottom: 0; }
-        /* line 514, ../sass/style.sass */
+        /* line 516, ../sass/style.sass */
         #mainContainer #content #meio article .excerpt-info .cat {
           margin-left: 1.46667em; }
-      /* line 516, ../sass/style.sass */
+      /* line 518, ../sass/style.sass */
       #mainContainer #content #meio article .excerpt-thumb {
         display: block;
         line-height: 0;
         margin-bottom: 1.46667em; }
-      /* line 521, ../sass/style.sass */
+      /* line 522, ../sass/style.sass */
+      #mainContainer #content #meio article table {
+        border-collapse: collapse;
+        width: 100%;
+        box-sizing: border-box; }
+        /* line 526, ../sass/style.sass */
+        #mainContainer #content #meio article table td {
+          border-color: white;
+          border-style: solid;
+          border-width: 0 1px 1px 0; }
+      /* line 531, ../sass/style.sass */
+      #mainContainer #content #meio article table#listaNotas td {
+        padding: 11px 11px 10px; }
+      /* line 533, ../sass/style.sass */
+      #mainContainer #content #meio article table#listaNotas .nota {
+        background-color: #999999;
+        text-align: center;
+        width: 1.46667em;
+        color: white; }
+      /* line 538, ../sass/style.sass */
+      #mainContainer #content #meio article table#listaNotas .modulo {
+        background-color: #f6f6f6; }
+      /* line 540, ../sass/style.sass */
+      #mainContainer #content #meio article table#listaNotas .aprovado .nota {
+        background-color: #8cc63f; }
+      /* line 542, ../sass/style.sass */
+      #mainContainer #content #meio article table#listaNotas .reprovado .nota {
+        background-color: #bf161c; }
+      /* line 545, ../sass/style.sass */
       #mainContainer #content #meio hr {
         margin-top: 1.46667em; }
-      /* line 524, ../sass/style.sass */
+      /* line 548, ../sass/style.sass */
       #mainContainer #content #meio #comments {
         /* ------ comment list -------- */
         /* ----- respond form --------- */ }
-        /* line 526, ../sass/style.sass */
+        /* line 550, ../sass/style.sass */
         #mainContainer #content #meio #comments .commentlist {
           list-style: none; }
-          /* line 528, ../sass/style.sass */
+          /* line 552, ../sass/style.sass */
           #mainContainer #content #meio #comments .commentlist li {
             margin-bottom: 0 !important; }
-            /* line 530, ../sass/style.sass */
+            /* line 554, ../sass/style.sass */
             #mainContainer #content #meio #comments .commentlist li .children {
               margin-left: 2.93333em;
               list-style: none; }
-            /* line 535, ../sass/style.sass */
+            /* line 559, ../sass/style.sass */
             .lt-ie8 #mainContainer #content #meio #comments .commentlist li .comment-body {
               list-style-position: outside; }
-            /* line 537, ../sass/style.sass */
+            /* line 561, ../sass/style.sass */
             #mainContainer #content #meio #comments .commentlist li .comment-body .vcard {
               margin-bottom: 1.46667em; }
-              /* line 540, ../sass/style.sass */
+              /* line 564, ../sass/style.sass */
               #mainContainer #content #meio #comments .commentlist li .comment-body .vcard .avatar, #mainContainer #content #meio #comments .commentlist li .comment-body .vcard cite {
                 float: left; }
-              /* line 542, ../sass/style.sass */
+              /* line 566, ../sass/style.sass */
               #mainContainer #content #meio #comments .commentlist li .comment-body .vcard cite {
                 margin-left: 0.36667em;
                 font: 2em/1.46667em "Yanone Kaffeesatz", calibri, sans-serif;
                 display: inline-block; }
-              /* line 546, ../sass/style.sass */
+              /* line 570, ../sass/style.sass */
               #mainContainer #content #meio #comments .commentlist li .comment-body .vcard .date {
                 height: 3.66667em;
                 line-height: 3.66667em;
                 margin: 5px 0 -25px 0.91667em;
                 padding-bottom: 0; }
-                /* line 551, ../sass/style.sass */
+                /* line 575, ../sass/style.sass */
                 #mainContainer #content #meio #comments .commentlist li .comment-body .vcard .date strong {
                   color: inherit; }
-            /* line 553, ../sass/style.sass */
+            /* line 577, ../sass/style.sass */
             #mainContainer #content #meio #comments .commentlist li .comment-body .commentText {
               padding: 1.46667em;
               margin: -1px 0 1.4em;
               clear: both; }
-            /* line 559, ../sass/style.sass */
+            /* line 583, ../sass/style.sass */
             #mainContainer #content #meio #comments .commentlist li .comment-body .reply a {
               float: right;
               margin: -0.36667em 0; }
-        /* line 564, ../sass/style.sass */
+        /* line 588, ../sass/style.sass */
         #mainContainer #content #meio #comments #respond {
           margin-bottom: 1.46667em; }
-          /* line 567, ../sass/style.sass */
+          /* line 590, ../sass/style.sass */
           #mainContainer #content #meio #comments #respond h3 small {
             font-size: inherit; }
-          /* line 571, ../sass/style.sass */
+          /* line 594, ../sass/style.sass */
           #mainContainer #content #meio #comments #respond #commentform {
             margin: -1px 0;
             padding: 1.46667em; }
-            /* line 577, ../sass/style.sass */
+            /* line 600, ../sass/style.sass */
             #mainContainer #content #meio #comments #respond #commentform label {
               display: block; }
-            /* line 579, ../sass/style.sass */
+            /* line 602, ../sass/style.sass */
             #mainContainer #content #meio #comments #respond #commentform textarea {
               height: 142px; }
-            /* line 581, ../sass/style.sass */
+            /* line 604, ../sass/style.sass */
             #mainContainer #content #meio #comments #respond #commentform code {
               font-size: 0.8em;
               line-height: 1.83334em;
               display: inline-block; }
-    /* line 592, ../sass/style.sass */
+    /* line 615, ../sass/style.sass */
     #mainContainer #content div#rightSideBar {
       width: 220px;
       padding: 0 20px;
       float: right; }
-      /* line 596, ../sass/style.sass */
+      /* line 619, ../sass/style.sass */
       #mainContainer #content div#rightSideBar p {
         font-size: 0.85em;
         line-height: 1.726em;
         margin-bottom: 1.726em; }
-      /* line 600, ../sass/style.sass */
+      /* line 623, ../sass/style.sass */
       #mainContainer #content div#rightSideBar h4 {
         font-family: "Open Sans", calibri, sans-serif;
         font-size: 0.8em;
         line-height: 1.83334em;
         margin-bottom: 0; }
-      /* line 609, ../sass/style.sass */
+      /* line 632, ../sass/style.sass */
       #mainContainer #content div#rightSideBar ul#bannersList li {
         background-color: black; }
-      /* line 611, ../sass/style.sass */
+      /* line 634, ../sass/style.sass */
       #mainContainer #content div#rightSideBar ul#bannersList a {
         display: block;
         border: 1px solid #bbbbbb;
@@ -876,14 +904,14 @@ textarea {
         -moz-transition: all 0.3s ease;
         -o-transition: all 0.3s ease;
         transition: all 0.3s ease; }
-        /* line 624, ../sass/style.sass */
+        /* line 647, ../sass/style.sass */
         #mainContainer #content div#rightSideBar ul#bannersList a:hover {
           opacity: 0.8;
           -webkit-transition: all 0.1s ease;
           -moz-transition: all 0.1s ease;
           -o-transition: all 0.1s ease;
           transition: all 0.1s ease; }
-        /* line 632, ../sass/style.sass */
+        /* line 655, ../sass/style.sass */
         #mainContainer #content div#rightSideBar ul#bannersList a:active {
           opacity: 1;
           border-color: white;
@@ -891,11 +919,11 @@ textarea {
           -moz-transition: all 0 ease;
           -o-transition: all 0 ease;
           transition: all 0 ease; }
-      /* line 640, ../sass/style.sass */
+      /* line 663, ../sass/style.sass */
       #mainContainer #content div#rightSideBar #fbLikeBox {
         background-color: white;
         border-top: 4px solid #315c99; }
-  /* line 646, ../sass/style.sass */
+  /* line 669, ../sass/style.sass */
   #mainContainer footer#main {
     position: fixed;
     bottom: 0;
@@ -904,23 +932,23 @@ textarea {
     height: 60px;
     background-color: #111111;
     color: white; }
-    /* line 654, ../sass/style.sass */
+    /* line 677, ../sass/style.sass */
     #mainContainer footer#main #fooIn {
       width: 940px;
       margin: 0 auto; }
-      /* line 657, ../sass/style.sass */
+      /* line 680, ../sass/style.sass */
       #mainContainer footer#main #fooIn p {
         line-height: 70px;
         margin: 0; }
-      /* line 660, ../sass/style.sass */
+      /* line 683, ../sass/style.sass */
       #mainContainer footer#main #fooIn ul#fooIcons {
         margin-left: 40px;
         float: left; }
-        /* line 663, ../sass/style.sass */
+        /* line 686, ../sass/style.sass */
         #mainContainer footer#main #fooIn ul#fooIcons li {
           float: left;
           /* icon footer */ }
-          /* line 665, ../sass/style.sass */
+          /* line 688, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a {
             background-image: url("../images/icon-sprite-2.png");
             display: block;
@@ -935,7 +963,7 @@ textarea {
             -moz-transition: background-color 0.2s ease-in;
             -o-transition: background-color 0.2s ease-in;
             transition: background-color 0.2s ease-in; }
-            /* line 681, ../sass/style.sass */
+            /* line 704, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a:hover {
               background-color: #191919;
               /* transition */
@@ -943,7 +971,7 @@ textarea {
               -moz-transition: background-color 0.1s ease-in;
               -o-transition: background-color 0.1s ease-in;
               transition: background-color 0.1s ease-in; }
-            /* line 690, ../sass/style.sass */
+            /* line 713, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a:active {
               background-color: #060606;
               /* transition */
@@ -951,45 +979,45 @@ textarea {
               -moz-transition: background-color 0;
               -o-transition: background-color 0;
               transition: background-color 0; }
-          /* line 699, ../sass/style.sass */
+          /* line 722, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoMcsp {
             background-position: 0 -88px; }
-            /* line 701, ../sass/style.sass */
+            /* line 724, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoMcsp:hover {
               background-position: 0 -9px; }
-          /* line 703, ../sass/style.sass */
+          /* line 726, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoWeb {
             background-position: 0 -248px; }
-            /* line 705, ../sass/style.sass */
+            /* line 728, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoWeb:hover {
               background-position: 0 -168px; }
-          /* line 707, ../sass/style.sass */
+          /* line 730, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoInf {
             background-position: 0 -408px; }
-            /* line 709, ../sass/style.sass */
+            /* line 732, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoInf:hover {
               background-position: 0 -328px; }
-          /* line 711, ../sass/style.sass */
+          /* line 734, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoTI {
             background-position: 0 -568px; }
-            /* line 713, ../sass/style.sass */
+            /* line 736, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoTI:hover {
               background-position: 0 -488px; }
-          /* line 715, ../sass/style.sass */
+          /* line 738, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoABC {
             background-position: 0 -728px; }
-            /* line 717, ../sass/style.sass */
+            /* line 740, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoABC:hover {
               background-position: 0 -648px; }
-          /* line 719, ../sass/style.sass */
+          /* line 742, ../sass/style.sass */
           #mainContainer footer#main #fooIn ul#fooIcons li a#icoHard {
             background-position: 0 -888px; }
-            /* line 721, ../sass/style.sass */
+            /* line 744, ../sass/style.sass */
             #mainContainer footer#main #fooIn ul#fooIcons li a#icoHard:hover {
               background-position: 0 -808px; }
 
 /* popup */
-/* line 737, ../sass/style.sass */
+/* line 760, ../sass/style.sass */
 .popup {
   display: none;
   background-color: white;
@@ -998,12 +1026,12 @@ textarea {
   line-height: 1;
   border-radius: 5px; }
 
-/* line 744, ../sass/style.sass */
+/* line 767, ../sass/style.sass */
 .popup div {
   white-space: nowrap;
   position: relative; }
 
-/* line 747, ../sass/style.sass */
+/* line 770, ../sass/style.sass */
 .popup .arrowTop {
   width: 18px;
   height: 8px;
@@ -1022,13 +1050,13 @@ textarea {
  * 2. The use of `table` rather than `block` is only necessary if using
  *    `:before` to contain the top-margins of child elements.
  */
-/* line 765, ../sass/style.sass */
+/* line 788, ../sass/style.sass */
 .cf:before,
 .cf:after {
   content: " ";
   display: table; }
 
-/* line 771, ../sass/style.sass */
+/* line 794, ../sass/style.sass */
 .cf:after {
   clear: both; }
 
@@ -1036,6 +1064,6 @@ textarea {
  * For IE 6/7 only
  * Include this rule to trigger hasLayout and contain floats.
  */
-/* line 779, ../sass/style.sass */
+/* line 802, ../sass/style.sass */
 .cf {
   *zoom: 1; }
