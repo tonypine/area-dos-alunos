@@ -1,5 +1,25 @@
 <?php
 	
+
+	/* ==================================== */
+	/* Format text */
+	/* ================================== */
+	function formatText($text = '') {
+		return ucwords(str_replace("/", " / ", strtolower( $text )));
+	}
+
+	/* ==================================== */
+	/* Format date */
+	/* ================================== */
+	function formatDate($date = '') {
+		$d = explode(" ", $date); 
+        $d = explode("-", $d[0]); 
+        return $d[2]."/".$d[1]."/".$d[0];
+	}
+
+	/* ==================================== */
+	/* Class Aluno */
+	/* ================================== */
 	
 	class aluno {
 
@@ -97,7 +117,7 @@
 			$modCods = Array();
 			while($m = mysql_fetch_object( $queryModulos )):
 
-				$m->descricao = $this->formatText( utf8_encode($m->descricao) );
+				$m->descricao = formatText( utf8_encode($m->descricao) );
 				$modCods[] = $m->codModulo;
 				array_push($modulos, $m);
 
@@ -136,97 +156,84 @@
 		/* ================================== */
 		public function getFrequency() {
 			
-			/* --------------------- */
-			/* Getting faltas
-			/* ------------------- */
+			/* ----------------------------------------------------------- */
+			/* Nova Master Query Sou Foda -- Getting Data Aulas/Faltas
+			/* --------------------------------------------------------- */
 
 			$sql = "SELECT 
-						A.DataFalta as data, 
-						C.Modulo as modulo, 
-						B.CodTurma as turma
+						a.*, 
+						m.Modulo as modulo,
+						f.DataFalta as falta, 
+						f.CTR as ctr
 					FROM 
-						TAB00206 A
-						LEFT OUTER JOIN 
-							TAB00208 B ON B.CodTurma = A.CodTurma 
-							and B.CodUnidade = A.CodUnidade 
-							and B.DataAula = A.DataFalta
-						LEFT OUTER JOIN 
-							TAB00204 C ON C.Codigo = B.CodModulo 
-							and C.CodUnidade = B.CodUnidade
-					WHERE 
-						A.CodUnidade = '".$_SESSION['Unidade']."'
-						AND A.CodCurso = '".$_SESSION['CodCurso']."'
-						AND A.CTR = '".$_SESSION['Ctr']."'
-						ORDER BY A.DataFalta";
-			
-			$queryFaltas = mysql_query($sql) or die ("Erro ao buscar as faltas.");
-			
-			/* -------------------------------------- */
-			/* Getting lessons num by modules
-			/* ------------------------------------ */
+						TAB00208 a
+						LEFT JOIN
+							TAB00206 f
+							ON
+								f.CodTurma = a.CodTurma
+								AND f.DataFalta = a.DataAula
+								AND f.CTR = '".$this->ctr."'
+								AND f.CodUnidade = a.CodUnidade
+						LEFT JOIN
+							TAB00204 m
+							ON
+								m.Codigo = a.CodModulo
+								AND m.CodUnidade = a.CodUnidade
 
-			$sql = "SELECT 
-						COUNT(A.CodModulo) as numAulas, 
-						A.CodModulo,
-						Case A.Apurado 
-							when 1 
-								then 'Apurado' 
-							when 0 
-								then 'NaoApurado' end as Apurado, 
-						B.Modulo as nome
-					FROM 
-						TAB00208 A
-						LEFT OUTER JOIN 
-							TAB00204 B ON B.Codigo = A.CodModulo
-							AND A.CodUnidade = B.CodUnidade
 					WHERE
-						A.CodUnidade =  '".$_SESSION['Unidade']."'
-						AND A.CodTurma = '" .$this->info->codTurma. "'
-						GROUP BY A.CodModulo";
+						a.CodTurma = '".$this->info->codTurma."'
+						AND	a.CodUnidade = '".$this->codUnidade."'
+					ORDER BY a.DataAula, f.DataFalta";
 
-			$queryLessons = mysql_query($sql) or die("Não foi possível contar as aulas.	");	
+			$queryAulas = mysql_query($sql) or die ("Erro ao buscar as Aulas.");
 			
-			/* ------------------------------ */
-			/* Setup the freq object
-			/* ---------------------------- */
-
+			/* ------------------------------------------- */
+			/* Setup the modules and faltas object
+			/* ----------------------------------------- */
+			
 			$this->freq->faltas = Array();
-			$this->freq->modulos = Array();
-			
-			while ($m = mysql_fetch_object($queryLessons)):
-				$this->freq->total += $m->numAulas;
-				$this->freq->modulos[] = $m;
+			$modulos = Array();
+			while($aula = mysql_fetch_object($queryAulas)):
+
+				if(!isset($modulos[$aula->CodModulo])):
+					$modulos[$aula->CodModulo] = (object) Array(
+						"name"			=> utf8_encode( formatText($aula->modulo) ),
+						"porcentagem"	=> 0,
+						"faltas"		=> 0,
+						"presencas"		=> 0,
+						"iniciado"		=> $aula->Apurado,
+						"total"			=> 0
+					);
+				endif;
+
+				/* se o módulo já foi iniciado */
+				if($aula->Apurado):
+
+					if(gettype($aula->falta) != 'NULL'):
+						$modulos[$aula->CodModulo]->faltas++;
+						$this->freq->totalFaltas++;
+
+						/* faltas object */
+						$aula->falta 	= formatDate( $aula->falta );
+						array_push($this->freq->faltas, $aula);
+					else:
+						$modulos[$aula->CodModulo]->presencas++;
+						$this->freq->totalPresencas++;
+					endif;
+					$modulos[$aula->CodModulo]->total++;
+					$this->freq->total++;
+
+				endif;
+
 			endwhile;
-			
-			while($falta = mysql_fetch_object($queryFaltas)):
+			mysql_data_seek($queryAulas, 0);
 
-				/* format faltas */
-				$falta->modulo 	= $this->formatText( utf8_encode($falta->modulo) );
-				$falta->data 	= $this->formatDate( $falta->data );
+			foreach ($modulos as $key => $m)
+				if($m->iniciado) $m->porcentagem = round( (100 / $m->total) * $m->presencas, 1 );
 
-				/* add faltas to the array */
-				array_push($this->freq->faltas, $falta);
-
-			endwhile;
-			
-		}
-
-		/* ==================================== */
-		/* Format text */
-		/* ================================== */
-		private function formatText($text = '') {
-			return ucwords(str_replace("/", " / ", strtolower( $text )));
-		}
-
-		/* ==================================== */
-		/* Format date */
-		/* ================================== */
-		private function formatDate($date = '') {
-			$d = explode(" ", $date); 
-            $d = explode("-", $d[0]); 
-            return $d[2]."/".$d[1]."/".$d[0];
-		}
-		
+			$this->freq->modulos = $modulos;
+			$this->freq->totalPorcentagem = round( (100 / $this->freq->total) * $this->freq->totalPresencas, 1 );
+		}		
 		
 	}
 	

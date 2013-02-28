@@ -6,6 +6,6 @@ $_SESSION = array();
 session_destroy();
 
 //REDIRECIONANDO PARA O LOGIN
-header("Location: http://localhost/alunos/login.php");
+header("Location: http://localhost/alunos");
 
 ?>

@@ -3,13 +3,13 @@
 	// Aluno Class
 
 	session_start();
-	 
+	
 	if($_SESSION['Unidade'] == "" or 
 	$_SESSION['CodCurso'] == "" or 
 	$_SESSION['Ctr'] == "" or 
 	$_SESSION['Nivel'] == "" or 
 	$_SESSION['Nivel'] != "1")
-		require_once("Logout.php");
+		require_once("Conexoes/Logout.php");
 		
 	require_once 'php/conexao.php';
 	require_once 'php/aluno.class.php';	

@@ -1,10 +1,9 @@
 <?php get_header(); ?>
 
 	<div id="content" class="cf">
-		<?php include('sidebar-nav.php'); 
-			session_start();
+		<?php 
+			include('sidebar-nav.php'); 
 			require_once 'php/conexao.php';
-			require_once '/Conexoes/VerificaAlunos.php';
 			require_once 'php/aluno.class.php';	
 			$aluno = new aluno(); ?> 
 		<div id="meio">
