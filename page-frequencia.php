@@ -8,13 +8,14 @@
 			$aluno = new aluno(); ?> 
 		<div id="meio">
             <article class="excerpt-article">
-				<h2>Frequência</h2>
+				<h1>Frequência</h1>
             	<?php
             		while(have_posts()): the_post();
             			the_content();
             		endwhile; 
 
 					$aluno->getAluno();
+					$aluno->doQueryAulas();
 					$aluno->getFrequency();	?>
 
 				<!-- =========================================== -->
@@ -64,13 +65,18 @@
 				<!-- Porcentagem de faltas por módulo -->
 				<!-- =========================================== -->
 				
+				<h3>Frquência por módulo</h3>
 				<ul>
 				<?php foreach ($aluno->freq->modulos as $key => $m): 
 					$liClass = '';
-					if(!$m->iniciado) $liModClass = 'disabled'; ?>
+					if(!$m->iniciado):
+						$liModClass = 'disabled'; 
+						$naoIniciado = ' (módulo não iniciado)';
+					endif;
+					?>
 					<li class="<?php echo $liModClass; ?>">
 						<div class="freqMiniPercent">
-							<h4><?php echo $m->name; ?></h4>
+							<h4><?php echo $m->name . $naoIniciado; ?></h4>
 							<div class="percentBar">
 								<?php 
 								$p = $m->porcentagem;
@@ -90,7 +96,6 @@
 									<td>Total de Aulas</td>
 									<td>Presenças</td>
 									<td>Faltas</td>
-									<td>Iniciado</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -99,7 +104,6 @@
 								echo "<td class='modulo'>".$m->total."</td>";
 								echo "<td class='modulo'>".$m->presencas."</td>";
 								echo "<td class='modulo'>".$m->faltas."</td>";
-								echo "<td class='modulo'>".$m->iniciado."</td>";
 								echo "</tr>";
 								echo '</table>'
 								?>
@@ -108,44 +112,6 @@
 					</li>
 				<?php endforeach; ?>
 				</ul>
-
-				<!-- =========================================== -->
-				<!-- Frequência por módulo -->
-				<!-- =========================================== -->
-
-				<h3>Frequência por módulo</h3>
-				<table id="listaFaltas">
-					<thead>
-						<tr>
-							<td>Módulo</td>
-							<td>Total</td>
-							<td>Presenças</td>
-							<td>Faltas</td>
-							<td>Porcentagem</td>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						/* --------------------- */
-						/* loop de faltas
-						/* ------------------- */
-
-						// echo "<tr><td>";
-						// dump($aluno->freq->modulos);
-						// echo "</td></tr>";
-
-						foreach($aluno->freq->modulos as $key => $m):
-							echo "<tr>";
-							echo "<td class='dataFalta'>".$m->name."</td>";
-							echo "<td class='modulo'>".$m->total."</td>";
-							echo "<td class='modulo'>".$m->presencas."</td>";
-							echo "<td class='modulo'>".$m->faltas."</td>";
-							echo "<td class='modulo'>".$m->porcentagem."%</td>";
-							echo "</tr>";
-						endforeach;
-						?>
-					</tbody>
-				</table>
 				
 				<!-- ============================ -->
 				<!-- Lista de Faltas -->

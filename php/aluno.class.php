@@ -44,6 +44,7 @@
 		);
 
 		public $freq = null;
+		public $cron = null;
 		
 		public function __construct() {
 			$this->codUnidade 	= $_SESSION['Unidade'];
@@ -152,18 +153,23 @@
 		}
 		
 		/* ==================================== */
-		/* Query Faltas */
+		/* Query Aulas */
 		/* ================================== */
-		public function getFrequency() {
-			
+
+		public function doQueryAulas()	{
+
 			/* ----------------------------------------------------------- */
 			/* Nova Master Query Sou Foda -- Getting Data Aulas/Faltas
 			/* --------------------------------------------------------- */
 
 			$sql = "SELECT 
-						a.*, 
+						a.CodModulo,
 						m.Modulo as modulo,
+						a.DataAula,
 						f.DataFalta as falta, 
+						a.Apurado,
+						a.ResumoMateria as resumo,
+						a.PrevisaoMateria,
 						f.CTR as ctr
 					FROM 
 						TAB00208 a
@@ -186,7 +192,17 @@
 					ORDER BY a.DataAula, f.DataFalta";
 
 			$queryAulas = mysql_query($sql) or die ("Erro ao buscar as Aulas.");
+			$this->queryAulas = $queryAulas;
+		}
+		
+		/* ==================================== */
+		/* Frequêncy */
+		/* ================================== */
+
+		public function getFrequency() {
 			
+			$queryAulas = $this->queryAulas;
+
 			/* ------------------------------------------- */
 			/* Setup the modules and faltas object
 			/* ----------------------------------------- */
@@ -220,10 +236,10 @@
 						$modulos[$aula->CodModulo]->presencas++;
 						$this->freq->totalPresencas++;
 					endif;
-					$modulos[$aula->CodModulo]->total++;
 					$this->freq->total++;
 
 				endif;
+				$modulos[$aula->CodModulo]->total++;
 
 			endwhile;
 			mysql_data_seek($queryAulas, 0);
@@ -233,6 +249,44 @@
 
 			$this->freq->modulos = $modulos;
 			$this->freq->totalPorcentagem = round( (100 / $this->freq->total) * $this->freq->totalPresencas, 1 );
+		}		
+		
+		/* ==================================== */
+		/* Cronogram */
+		/* ================================== */
+
+		public function setupCronogram() {
+			
+			$qAulas = $this->queryAulas;
+			mysql_data_seek($qAulas, 0);
+
+			/* ------------------------------------------- */
+			/* Setup the modules object
+			/* ----------------------------------------- */
+			
+			$modulos = Array();
+			while($a = mysql_fetch_object($qAulas)):
+
+				$cod = $a->CodModulo;
+				if(!isset($modulos[$cod])):
+					$modulos[$cod] = (object) Array(
+						"name"			=> utf8_encode( formatText($a->modulo) ),
+						"aulas"			=> Array()
+					);
+				endif;
+
+				$modulos[$cod]->aulas[] = (object) Array(
+								"data"		=> formatDate( $a->DataAula ),
+								"presenca"	=> 0,
+								"descricao"	=> ucwords( str_replace(array("Ç","Ã"),array("ç","ã"),strtolower( utf8_encode( $a->resumo ) )) )
+							);
+
+				if(gettype($a->falta) == 'NULL')
+					end($modulos[$cod]->aulas)->presenca = 1;
+
+			endwhile;
+
+			$this->cron = $modulos;
 		}		
 		
 	}

@@ -2,6 +2,18 @@
 	<aside id="navSidebar">
 		<nav id="mainNav" class="navMenu">
 			<ul>
+				<li>
+					<a id="btnHome" href="index.php">Visão Geral</a>
+					<!--
+					<ul class="subMenu">
+						<li><a href="javascript:void();">Windows7 / Introdução</a></li>
+						<li><a href="javascript:void();">Internet / Windows Mail</a></li>
+						<li><a href="javascript:void();">Multimidia</a></li>
+						<li><a href="javascript:void();">Word</a></li>
+						<li><a href="javascript:void();">Arte & Foto</a></li>
+						<li><a href="javascript:void();">Excel</a></li>
+					</ul>-->
+				</li>
 				<?php
 					$menu = wp_get_nav_menu_object( 'main-menu' );
 					$args = array(
@@ -13,10 +25,6 @@
 						echo "<li><a id='btn-".basename( $menu_item->url )."' href='".$menu_item->url."'>".$menu_item->title."</a></li>";
 					}
 				?>
-				<li><a id="btnHome" href="index.php">Visão Geral</a></li>
-				<li><a id="btnBoletim" href="#">Boletim</a></li>
-				<li><a id="btnFreq" href="frequencia.php">Frequência</a></li>
-				<li><a id="btnCrono" href="#">Cronograma</a></li>
 			</ul>
 		</nav>
 		<hr class="dotLine" />
