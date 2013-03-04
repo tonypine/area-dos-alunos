@@ -36,7 +36,6 @@
 				endwhile;
 
 				?>
-				<h3>Aulas</h3>
 				<?php //dump($aluno->cron); ?>
 				<ul>
 				<?php foreach ($aluno->cron as $key => $m): ?>
@@ -45,7 +44,6 @@
 						<table id="listaFaltas">
 							<thead>
 								<tr>
-									<td>Presença</td>
 									<td>Data</td>
 									<td>Descrição</td>
 								</tr>
@@ -54,13 +52,12 @@
 								<?php
 								foreach ($m->aulas as $key => $a):
 
-									echo "<tr>";
-									$presenca = "faltou";	
+									$presenca = "falta";	
 									if($a->presenca)
 										$presenca = "presente";
-									echo "<td class='presenca'><span class='".$presenca."'></span></td>";
-									echo "<td>".$a->data."</td>";
-									echo "<td>".$a->descricao."</td>";
+									echo "<tr class='".$presenca."'>";
+									echo "<td class='data'>".$a->data."</td>";
+									echo "<td class='desc'>".$a->descricao."</td>";
 									echo "</tr>";
 									
 								endforeach;
