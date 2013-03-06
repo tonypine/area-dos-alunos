@@ -3,7 +3,7 @@
 		<nav id="mainNav" class="navMenu">
 			<ul>
 				<li>
-					<a id="btnHome" href="<?php echo get_bloginfo( 'wpurl' ); ?>">Visão Geral</a>
+					<a id="btnHome" href="<?php echo get_bloginfo( 'wpurl' ); ?>/">Visão Geral</a>
 					<!--
 					<ul class="subMenu">
 						<li><a href="javascript:void();">Windows7 / Introdução</a></li>

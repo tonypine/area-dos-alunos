@@ -732,7 +732,7 @@ textarea {
   float: left;
   border-top: 5px solid #8cc63f;
   width: 360px;
-  font: 13px/18px "bold";
+  font: 400 13px/18px "Open Sans", calibri, sans-serif;
   color: white;
 }
 /* line 398, ../sass/style.sass */
@@ -756,7 +756,7 @@ textarea {
   float: left;
   text-align: center;
   color: white;
-  font: 13px/110px "bold";
+  font: 400 13px/110px "Open Sans", calibri, sans-serif;
   height: 80px;
   padding: 0 20px;
   text-decoration: none;

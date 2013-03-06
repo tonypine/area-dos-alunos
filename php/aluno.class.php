@@ -44,11 +44,19 @@
 
 		public $freq = null;
 		public $cron = null;
+
+		public $mysqli = null;
 		
-		public function __construct() {
-			$this->codUnidade 	= $_SESSION['Unidade'];
-			$this->codCurso 	= $_SESSION['CodCurso'];
-			$this->ctr 			= $_SESSION['Ctr'];
+		public function __construct($codUnidade = null, $codCurso = null, $ctr = null) {
+			if(!$codUnidade || !$codCurso || !$ctr)
+				return false;
+
+			$this->codUnidade 	= $codUnidade;
+			$this->codCurso 	= $codCurso;
+			$this->ctr 			= $ctr;
+			
+			require_once 'conexao.php';
+			$this->mysqli = $mysqli;
 		}
 		
 		/* ==================================== */
@@ -56,8 +64,6 @@
 		/* ================================== */
 		public function getAluno() {
 
-			global $mysqli;
-			
 			// aluno
 			$sql  = "SELECT ";
 			$sql .= implode(",", $this->aFields); 
@@ -65,28 +71,32 @@
 					WHERE CodUnidade = '".$this->codUnidade."'
 					AND CodCurso = '".$this->codCurso."'
 					AND CTR = '".$this->ctr."'";
-			
 
-
-			$queryAluno = $mysqli->query($sql) or die ("Erro");
+			$queryAluno = $this->mysqli->query($sql) or die ("Erro");
 			
 			/* unidade */
-			$u = $mysqli->query("
+			$u = $this->mysqli->query("
 			SELECT Unidade 
 			FROM TAB_Unidades
-			WHERE CodUnidade = '".$_SESSION['Unidade']."'
+			WHERE CodUnidade = '".$this->codUnidade."'
 			") or die ("Erro 2");
 			$uni = $u->fetch_object();
 
-			$this->info = $queryAluno->fetch_object();
-			$this->info->unidade = utf8_encode( $uni->Unidade );
+			$info = $queryAluno->fetch_object();
+			$info->unidade = utf8_encode( $uni->Unidade );
 
-			$idade = preg_split("/ /", $this->info->dataNascimento);
+			$info->nome = ucwords(strtolower($info->nome));
+
+
+			$idade = preg_split("/ /", $info->dataNascimento);
 			$data_nascimento = strtotime($idade[0]." 00:00:00");
 		    $data_calcula = strtotime(date('Y-m-d')." 00:00:00");
-		    $idade = floor(abs($data_calcula-$data_nascimento)/60/60/24/365);
-		    $this->info->old = $idade;
+		    $old = floor(abs($data_calcula-$data_nascimento)/60/60/24/365);
 			
+		    $info->old = $old;
+		    $info->dataNascimento = str_replace("-", "/", $idade[0]);
+
+			$this->info = $info;
 		}
 
 		/* ==================================== */
@@ -94,7 +104,7 @@
 		/* ================================== */
 		public function getModulos() {
 
-			global $mysqli;
+			$this->getAluno();
 
 			/* ------------------------------------- */
 			/* Getting modules */
@@ -110,7 +120,7 @@
 					GROUP BY TAB00212.CodModulo
 					ORDER BY TAB00212.CodModulo ASC";
 
-			$queryModulos = $mysqli->query( $sql ) or die('Erro ao buscar módulos');
+			$queryModulos = $this->mysqli->query( $sql ) or die('Erro ao buscar módulos');
 			
 			/* ---------------------------------------------------------- */
 			/* Filtering queries and setup the main modulos object */
@@ -129,8 +139,7 @@
 			/* ------------------------------------- */
 			/* Getting Nota os modules */
 			/* ----------------------------------- */
-
-			$queryNota = $mysqli->query("
+			$queryNota = $this->mysqli->query("
 			SELECT C.Codigo, AVG(E.Nota) AS nota
 			FROM TAB00200 A
 			INNER JOIN TAB00005 B ON B.CodUnidade = A.CodUnidade AND B.Codigo = A.CodCurso

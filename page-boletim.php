@@ -1,8 +1,9 @@
-<?php get_header(); ?>
+<?php 
+	get_header(); ?>
 
 	<div id="content" class="cf">
 		<?php 
-		if($logged):
+		if($_SESSION['logged']):
 			include('sidebar-nav.php'); ?> 
 			<div id="meio">
 	            <article class="excerpt-article">
@@ -12,7 +13,7 @@
 	            			the_content();
 	            		endwhile;
 	            		
-						$aluno->getModulos();
+						//$aluno->getModulos();
 
 						/* --------------------- */
 						/* Table of notes

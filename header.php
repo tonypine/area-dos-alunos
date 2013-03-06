@@ -1,24 +1,14 @@
 <?php
 
 	session_start();
-	
-	global $logged, $aluno, $session, $mysqli;
-
-	if($_SESSION['Unidade'] == "" or 
-	$_SESSION['CodCurso'] == "" or 
-	$_SESSION['Ctr'] == "" or 
-	$_SESSION['Nivel'] == "" or 
-	$_SESSION['Nivel'] != "1"):
-		$logged = 0;
-	else:
-		$logged = 1;
+	global $aluno;
+	if($_SESSION['logged']):
 
 		/* instanciate the SESSION for be accessible on all requires */
-		$session = $_SESSION;
-		require_once 'php/conexao.php';
 		require_once 'php/aluno.class.php';	
-		$aluno = new aluno(); 
-		$aluno->getAluno(); 
+		$aluno = new aluno($_SESSION['codUnidade'], $_SESSION['codCurso'], $_SESSION['ctr']); 
+		// $aluno->getAluno(); 
+
 	endif;
 	?>
 <!DOCTYPE html>
@@ -47,7 +37,6 @@
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
-
 	<body>
 
 		<!-- facebook -->
@@ -62,7 +51,7 @@
 					/* ================================= */
 					/* if logged in */
 					/* =============================== */
-					if($logged): ?>
+					if($_SESSION['logged']): ?>
 
 						<!-- ============================= -->
 						<!-- Normal header -->
@@ -72,18 +61,7 @@
 								<img src="<?php url(); ?>/images/userPhoto.jpg" />
 							</div>
 							<table id="uInfo">
-								<tr>
-									<td><?php echo ucwords( strtolower( $aluno->info->nome ) ); ?></td>
-									<td>Curso: Informática</td>
-								</tr>
-								<tr>
-									<td><?php echo $aluno->info->old; ?> anos</td>
-									<td>Módulo: 4 Desenho Digital</td>
-								</tr>
-								<tr>
-									<td><a href="" class="blueLink">editar perfil</a></td>
-									<td>Unidade: <?php echo $aluno->info->unidade; ?></td>
-								</tr>
+								<tr><td>loading ...</td></tr>
 							</table>
 						</section>
 						<ul id="topConfig">

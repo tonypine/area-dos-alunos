@@ -31,20 +31,17 @@ $user->bind_result($codUnidade, $cod, $pass, $level, $ativo);
 $user->fetch();
 
 /* Definindo as variáveis de sessão */
-$_SESSION['Unidade'] = $codUnidade;
-$_SESSION['CodCurso'] = substr($usuario, 0, 3);
-$_SESSION['Ctr'] = substr($usuario, 3, 8);
-$_SESSION['Nivel'] = $level;
+$_SESSION['codUnidade'] = $codUnidade;
+$_SESSION['codCurso'] = substr($usuario, 0, 3);
+$_SESSION['ctr'] = substr($usuario, 3, 8);
+$_SESSION['level'] = $level;
+$_SESSION['logged'] = 1;
 
 $response = (object) Array(
 		'message' 	=> '',
 		'login'		=> 0,
 		'rows'		=> $user->num_rows
 	);
-
-
-echo json_encode($user);
-exit;
 
 /* Verificando se o retorno é uma única linha */
 if($user->num_rows == "1"):
@@ -56,7 +53,7 @@ if($user->num_rows == "1"):
 		INSERT 
 			INTO 
 				TAB_ControleAcesso (CodUnidade, Codigo, Data) 
-			VALUES('".$_SESSION['Unidade']."', '".$_SESSION['CodCurso'].$_SESSION['Ctr']."', '".date('Y-m-d H:i:s')."')");
+			VALUES('".$_SESSION['codUnidade']."', '".$_SESSION['codCurso'].$_SESSION['ctr']."', '".date('Y-m-d H:i:s')."')");
 	
 	switch ($_SESSION['Nivel']):
 		case 1:

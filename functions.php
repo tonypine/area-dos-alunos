@@ -158,6 +158,7 @@ function url($echo = true){
 	}
 	echo get_bloginfo('template_directory');
 }
+$url = get_bloginfo('template_directory');
 
 // add galery rel
 function custom_gallery_image($html, $id, $caption){

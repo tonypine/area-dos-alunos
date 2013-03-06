@@ -46,6 +46,65 @@
 
 })(jQuery);
 
+/* =====================================================
+    Router 
+======================================================= */
+
+(function ($) {
+
+    var methods = {
+        init: function (options) {
+            return this.each(function() {
+                $(this).data( $.extend({
+                    "routes": {
+                        boletim: function() {
+                            $.ajax({
+                                type:   'GET',
+                                url:    url + '/_getBoletim.php',
+                                success: function (r) {
+                                    $("#meio").html(r);
+                                }
+                            });
+                        },
+                        default: function (argument) {
+                            $.ajax({
+                                type:   'GET',
+                                url:    url + '/_getDefault.php',
+                                success: function (r) {
+                                    $("#meio").html(r);
+                                }
+                            });
+                        }
+                    }
+                }, options) );
+                methods.route.apply(this);
+                addHashChange( $.proxy( methods.route, this ) );
+            });
+        },
+        route: function (argument) {
+            var hash = window.location.hash;
+            if(hash != '') {
+                hash = hash.replace( /(#[\/]*)([\w\d]+)([\/]*)/g, "$2");
+                var f = $(this).data('routes')[ $.fn.basename( hash ) ];
+                typeof f === "function" ? f() : $(this).data('routes')['default']()
+            }
+        }
+    };
+
+    $.fn.route = function(method) {
+        if ( methods[method] ) {
+            return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+        } else if ( typeof method === 'object' || ! method ) {
+            return methods.init.apply( this, arguments );
+        } else {
+            $.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
+        }    
+    };
+
+})(jQuery);
+
+$(window).route();
+
 // Author: Tony Pinheiro
 (function($) {
 
@@ -57,7 +116,7 @@
                 erro : '.msgErro',
                 msg : '.msg',
                 textMsg : 'Entrando ...',
-                textErro : 'Login inválido. Tente novamente xD',
+                textErro : 'Login invรกlido. Tente novamente xD',
                 loader : '.loader'
             }, options);
 
@@ -132,4 +191,31 @@ $(document).ready(function() {
         $(this).adjustVRhythm();
     });
 
+
+    function ajax() {
+
+        if(!$.cookie('uInfo')) {
+
+            $('#uInfo').html('<tr><td>loading...</td></tr>');
+            var data = session;
+            $.ajax({
+                type:       'GET',
+                url:        url + '/_getHeader.php',
+                cache:      false,
+                data:       data, 
+                dataType:   'json',
+                success: function (r) {
+                    $.cookie('uInfo', JSON.stringify(r), { expires: 1, path: '/' });
+                    var template = $("#t_uInfo").html();
+                    var outpout = Mustache.render( template, r );
+                    $('#uInfo').html(outpout);
+                }
+            })
+            
+        } else {
+            $('#uInfo').html( Mustache.render( $("#t_uInfo").html(), JSON.parse($.cookie('uInfo')) ) );
+        }
+    }
+
+    ajax();
 });

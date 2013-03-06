@@ -34,7 +34,24 @@
         };
     </script>
 	
+	<script id="t_uInfo" type="text/html">
+		<tr>
+			<td>{{ nome }}</td>
+			<td>Curso: Informática</td>
+		</tr>
+		<tr>
+			<td>{{ old }} anos</td>
+			<td>Módulo: 4 Desenho Digital</td>
+		</tr>
+		<tr>
+			<td><a href="" class="blueLink">editar perfil</a></td>
+			<td>Unidade: {{ unidade }}</td>
+		</tr>
+	</script>
+
 	<script type="text/javascript">
+    <?php global $session; ?>
+    var session = <?php echo json_encode($_SESSION); ?>;
 
 		var url = "<?php url(); ?>";
         
@@ -82,14 +99,14 @@
         }
 
         load(function() {
-            loadScript('<?php url(); ?>/js/plugins.js?v=1', { 
+            loadScript('<?php url(); ?>/js/plugins.js', { 
                 id: "plugins", 
                 cb: function(){
-                    loadScript('<?php url(); ?>/js/myScript.js?v=1.2');
-                    loadScript('<?php url(); ?>/js/lightbox-min.js?v=1', { id: 'lightbox-js' });
+                    loadScript('<?php url(); ?>/js/myScript.js');
+                    loadScript('<?php url(); ?>/js/lightbox-min.js', { id: 'lightbox-js' });
                 } 
             });
-            loadScript('//connect.facebook.net/pt_BR/all.js#xfbml=1', { id: 'facebook-jssdk' });
+            // loadScript('//connect.facebook.net/pt_BR/all.js#xfbml=1', { id: 'facebook-jssdk' });
         });
 
     </script>
