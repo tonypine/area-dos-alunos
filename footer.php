@@ -14,61 +14,85 @@
 			</footer><!-- #colophon -->
 		</div><!-- #mainContainer -->
 	
-        <script type="text/javascript">
-            var gOverride = {
-              urlBase: 'http://gridder.andreehansson.se/releases/latest/',
-              gColor: '#EEEEEE',
-              gColumns: 12,
-              gOpacity: 0.35,
-              gWidth: 10,
-              pColor: '#ff0000',
-              pHeight: 22,
-              pOffset: 0,
-              pOpacity: 0.45,
-              center: true,
-              gEnabled: false,
-              pEnabled: true,
-              setupEnabled: true,
-              fixFlash: true,
-              size: 960
-            };
-        </script>
+    <script type="text/javascript">
+        var gOverride = {
+          urlBase: 'http://gridder.andreehansson.se/releases/latest/',
+          gColor: '#EEEEEE',
+          gColumns: 12,
+          gOpacity: 0.35,
+          gWidth: 10,
+          pColor: '#ff0000',
+          pHeight: 22,
+          pOffset: 0,
+          pOpacity: 0.45,
+          center: true,
+          gEnabled: false,
+          pEnabled: true,
+          setupEnabled: true,
+          fixFlash: true,
+          size: 960
+        };
+    </script>
 	
-		<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+	<script type="text/javascript">
 
-		<script type="text/javascript">
+		var url = "<?php url(); ?>";
+        
+        function loadScript(src, op) {
+            var d = document,
+                s = 'script',
+                done = false;
+            
+            if(op) {
+              var id = op.id,
+                  cb = op.cb; }
 
-			function loadScript(src, id, callback) {
-				var d = document,
-					s = 'script',
-					done = false;
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s); js.id = id;
-				js.src = src;
-                js.type = 'text/javascript';
-                js.charset = 'utf-8';
-                js.onload = js.onreadstatechange = function() {
-                    if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
-                        done = true;
-                        js.onload = js.onreadystatechange = null;
-                            if (callback) {
-                                callback();
-                            }
-                        }
+            var js, b = d.getElementsByTagName('body')[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+
+            js.src = src;
+            js.type = 'text/javascript';
+
+            /* on load */
+            js.onload = js.onreadystatechange = function() {
+                if ( !done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") ) {
+                    done = true;
+
+                    // Handle memory leak in IE
+                    js.onload = js.onreadystatechange = null;
+
+                    if(cb)
+                        cb();
                 }
-				fjs.parentNode.insertBefore(js, fjs);
-			}
+            };
 
-			var url = "<?php url(); ?>";
+            b.insertBefore(js, b.firstChild);
+        }
 
-            loadScript('<?php url(); ?>/js/myScript.js?v=1');
-            loadScript('<?php url(); ?>/js/lightbox-min.js?v=1', 'lightbox-js');
-            loadScript('//connect.facebook.net/pt_BR/all.js#xfbml=1','facebook-jssdk');
+        function load(f, o) {
+            if(!o)
+                var o = window;
+            // Check for browser support of event handling capability
+            if (o.addEventListener)
+            o.addEventListener("load", f, false);
+            else if (o.attachEvent)
+            o.attachEvent("onload", f);
+            else o.onload = f;
+        }
 
-        </script>
+        load(function() {
+            loadScript('<?php url(); ?>/js/plugins.js?v=1', { 
+                id: "plugins", 
+                cb: function(){
+                    loadScript('<?php url(); ?>/js/myScript.js?v=1.2');
+                    loadScript('<?php url(); ?>/js/lightbox-min.js?v=1', { id: 'lightbox-js' });
+                } 
+            });
+            loadScript('//connect.facebook.net/pt_BR/all.js#xfbml=1', { id: 'facebook-jssdk' });
+        });
+
+    </script>
 		
 	</body>
 </html>

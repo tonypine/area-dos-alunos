@@ -75,24 +75,22 @@
         },
         send : function() {
             $this = $(this);
-            //alert($(this).attr('action'));
             $.ajax({
                 type : 'POST',
                 url : $this.attr('action'),
                 data : $this.serialize(),
-                dataType : 'html',
+                dataType : 'json',
                 context : this
             }).done(function(r) {
-                methods.success(r, $this);
+                methods.success.apply(this, [r]);
             });
 
             return false;
         },
-        success : function(r, form) {
-            $this = form;
-            if (!r) {
-                //alert('Login Incorreto');
-                $this.find('.popup .msgErro').text('Login incorreto, tente novamente');
+        success : function(r) {
+            $this = $(this);
+            if (!r.login) {
+                $this.find('.popup .msgErro').text(r.message);
                 $this.find('.popup .msg').text('');
                 $this.find('.loader').css('display', 'none');
                 setTimeout(function() {
@@ -100,7 +98,7 @@
                 }, 1500);
             } else {
                 $this.find('.popup .msg').text('Redirecionando ...');
-                window.location = 'Sistema/Aluno2/';
+                window.location = window.location.href;
             }
         },
         error : function() {

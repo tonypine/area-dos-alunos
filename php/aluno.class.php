@@ -1,5 +1,4 @@
 <?php
-	
 
 	/* ==================================== */
 	/* Format text */
@@ -50,14 +49,14 @@
 			$this->codUnidade 	= $_SESSION['Unidade'];
 			$this->codCurso 	= $_SESSION['CodCurso'];
 			$this->ctr 			= $_SESSION['Ctr'];
-			
-			//$this->getAluno();
 		}
 		
 		/* ==================================== */
 		/* Query Aluno */
 		/* ================================== */
 		public function getAluno() {
+
+			global $mysqli;
 			
 			// aluno
 			$sql  = "SELECT ";
@@ -67,19 +66,20 @@
 					AND CodCurso = '".$this->codCurso."'
 					AND CTR = '".$this->ctr."'";
 			
-			$queryAluno = mysql_query($sql) or die ("Erro");
+
+
+			$queryAluno = $mysqli->query($sql) or die ("Erro");
 			
-			// unidade
-			$u = mysql_query("
+			/* unidade */
+			$u = $mysqli->query("
 			SELECT Unidade 
 			FROM TAB_Unidades
 			WHERE CodUnidade = '".$_SESSION['Unidade']."'
-			") or die ("Erro");
-			$uniNome = mysql_fetch_assoc($u);
-			$unidade = $uniNome['Unidade'];
-			
-			$this->info = mysql_fetch_object($queryAluno);
-			$this->info->unidade = utf8_encode( $unidade );
+			") or die ("Erro 2");
+			$uni = $u->fetch_object();
+
+			$this->info = $queryAluno->fetch_object();
+			$this->info->unidade = utf8_encode( $uni->Unidade );
 
 			$idade = preg_split("/ /", $this->info->dataNascimento);
 			$data_nascimento = strtotime($idade[0]." 00:00:00");
@@ -93,6 +93,8 @@
 		/* Query Modulos */
 		/* ================================== */
 		public function getModulos() {
+
+			global $mysqli;
 
 			/* ------------------------------------- */
 			/* Getting modules */
@@ -108,7 +110,7 @@
 					GROUP BY TAB00212.CodModulo
 					ORDER BY TAB00212.CodModulo ASC";
 
-			$queryModulos = mysql_query( $sql ) or die('Erro ao buscar módulos');
+			$queryModulos = $mysqli->query( $sql ) or die('Erro ao buscar módulos');
 			
 			/* ---------------------------------------------------------- */
 			/* Filtering queries and setup the main modulos object */
@@ -116,7 +118,7 @@
 
 			$modulos = Array();
 			$modCods = Array();
-			while($m = mysql_fetch_object( $queryModulos )):
+			while($m = $queryModulos->fetch_object() ):
 
 				$m->descricao = formatText( utf8_encode($m->descricao) );
 				$modCods[] = $m->codModulo;
@@ -128,7 +130,7 @@
 			/* Getting Nota os modules */
 			/* ----------------------------------- */
 
-			$queryNota = mysql_query("
+			$queryNota = $mysqli->query("
 			SELECT C.Codigo, AVG(E.Nota) AS nota
 			FROM TAB00200 A
 			INNER JOIN TAB00005 B ON B.CodUnidade = A.CodUnidade AND B.Codigo = A.CodCurso
@@ -145,7 +147,7 @@
 			/* ----------------------------------- */
 
 			foreach ($modulos as $key => $m) {
-				$m->nota = mysql_fetch_object( $queryNota );
+				$m->nota = $queryNota->fetch_object();
 			}
 
 			$this->modulos = $modulos;
@@ -157,6 +159,8 @@
 		/* ================================== */
 
 		public function doQueryAulas()	{
+
+			global $mysqli;
 
 			/* ----------------------------------------------------------- */
 			/* Nova Master Query Sou Foda -- Getting Data Aulas/Faltas
@@ -191,8 +195,9 @@
 						AND	a.CodUnidade = '".$this->codUnidade."'
 					ORDER BY a.DataAula, f.DataFalta";
 
-			$queryAulas = mysql_query($sql) or die ("Erro ao buscar as Aulas.");
+			$queryAulas = $mysqli->query($sql) or die ("Erro ao buscar as Aulas.");
 			$this->queryAulas = $queryAulas;
+
 		}
 		
 		/* ==================================== */
@@ -200,8 +205,9 @@
 		/* ================================== */
 
 		public function getFrequency() {
-			
+
 			$queryAulas = $this->queryAulas;
+			$queryAulas->data_seek(0);
 
 			/* ------------------------------------------- */
 			/* Setup the modules and faltas object
@@ -209,7 +215,7 @@
 			
 			$this->freq->faltas = Array();
 			$modulos = Array();
-			while($aula = mysql_fetch_object($queryAulas)):
+			while($aula = $queryAulas->fetch_object() ):
 
 				if(!isset($modulos[$aula->CodModulo])):
 					$modulos[$aula->CodModulo] = (object) Array(
@@ -242,7 +248,6 @@
 				$modulos[$aula->CodModulo]->total++;
 
 			endwhile;
-			mysql_data_seek($queryAulas, 0);
 
 			foreach ($modulos as $key => $m)
 				if($m->iniciado) $m->porcentagem = round( (100 / $m->total) * $m->presencas, 1 );
@@ -258,14 +263,14 @@
 		public function setupCronogram() {
 			
 			$qAulas = $this->queryAulas;
-			mysql_data_seek($qAulas, 0);
+			$qAulas->data_seek(0);
 
 			/* ------------------------------------------- */
 			/* Setup the modules object
 			/* ----------------------------------------- */
 			
 			$modulos = Array();
-			while($a = mysql_fetch_object($qAulas)):
+			while($a = $qAulas->fetch_object()):
 
 				$cod = $a->CodModulo;
 				if(!isset($modulos[$cod])):
@@ -290,5 +295,5 @@
 		}		
 		
 	}
-	
+
 ?>

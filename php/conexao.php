@@ -1,20 +1,12 @@
 <?php
 
 //CONSULTANDO O BANCO SETCOM NA MAQUINA LOCAL DA ESCOLA
-$host = "mysql.alunos.microcampsp.com.br";
+/* mysql.alunos.microcampsp.com.br */
+$host = "64.90.52.220";
 $database = "portalalunos_db_pd";
 $username = "portalalunosdbpd";
 $password = "alunos_web!12db";
 
-$con = mysql_connect($host, $username, $password) or die ("NÃ£o foi possivel fazer a conexÃ£o com o banco do Portal");
-$db = mysql_select_db($database, $con);
-
-header('Content-Type: text/html; charset=UTF-8');
-mysql_query("SET NAMES 'UTF-8'");
-header("Cache-Control: no-cache, must-revalidate"); 
-header('Pragma: no-cache');
-
-date_default_timezone_set('America/Sao_Paulo');
-
+$mysqli = new mysqli($host, $username, $password, $database) or die ("N«ªo foi possivel fazer a conex«ªo com o banco do Portal");
 
 ?>
