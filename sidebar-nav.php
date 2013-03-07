@@ -1,9 +1,9 @@
-	
+<?php $site = get_bloginfo( 'wpurl' ); ?>
 	<aside id="navSidebar">
 		<nav id="mainNav" class="navMenu">
 			<ul>
 				<li>
-					<a id="btnHome" href="<?php echo get_bloginfo( 'wpurl' ); ?>/">Visão Geral</a>
+					<a id="btnHome" href="<?php echo get_bloginfo( 'wpurl' ); ?>/#/">Visão Geral</a>
 					<!--
 					<ul class="subMenu">
 						<li><a href="javascript:void();">Windows7 / Introdução</a></li>
@@ -22,7 +22,7 @@
 						);
 					$menu_itens = wp_get_nav_menu_items($menu->term_id, $args);
 					foreach ( (array) $menu_itens as $menu_item ) {
-						echo "<li><a id='btn-".basename( $menu_item->url )."' href='".$menu_item->url."'>".$menu_item->title."</a></li>";
+						echo "<li><a id='btn-".basename( $menu_item->url )."' href='".$site."/#/".basename($menu_item->url)."'>".$menu_item->title."</a></li>";
 					}
 				?>
 			</ul>
@@ -40,7 +40,7 @@
 					$i = 0;
 					foreach ( (array) $menu_itens as $menu_item ) {
 						$i = $i + 1;
-						echo "<li><a id='secondary-item".$i."' href='".$menu_item->url."'>".$menu_item->title."</a></li>";
+						echo "<li><a id='secondary-item".$i."' href='".$site."/#/category/".basename($menu_item->url)."'>".$menu_item->title."</a></li>";
 					}
 				?>
 			</ul>

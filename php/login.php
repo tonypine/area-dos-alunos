@@ -26,7 +26,8 @@ $user = $mysqli->prepare("
 		AND SENHA = ?
 ");
 $user->bind_param('sss', $CodUnidade, $usuario, $senha);
-$user->execute();
+$user->execute() or trigger_error($user->error());
+$user->store_result();
 $user->bind_result($codUnidade, $cod, $pass, $level, $ativo);
 $user->fetch();
 
@@ -44,6 +45,7 @@ $response = (object) Array(
 	);
 
 /* Verificando se o retorno é uma única linha */
+
 if($user->num_rows == "1"):
 	
 	if($ativo)
@@ -55,7 +57,7 @@ if($user->num_rows == "1"):
 				TAB_ControleAcesso (CodUnidade, Codigo, Data) 
 			VALUES('".$_SESSION['codUnidade']."', '".$_SESSION['codCurso'].$_SESSION['ctr']."', '".date('Y-m-d H:i:s')."')");
 	
-	switch ($_SESSION['Nivel']):
+	switch ($_SESSION['level']):
 		case 1:
 			//header("Location: Sistema/Aluno/index.php");
 			break;
@@ -74,7 +76,7 @@ if($user->num_rows == "1"):
 	endswitch;
 	
 else:
-	$response->message = "Login inválido";
+	$response->message .= "Login inválido";
 endif;
 
 echo json_encode($response);

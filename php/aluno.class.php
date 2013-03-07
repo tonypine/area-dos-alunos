@@ -204,7 +204,7 @@
 						AND	a.CodUnidade = '".$this->codUnidade."'
 					ORDER BY a.DataAula, f.DataFalta";
 
-			$queryAulas = $mysqli->query($sql) or die ("Erro ao buscar as Aulas.");
+			$queryAulas = $this->mysqli->query($sql) or die ("Erro ao buscar as Aulas.");
 			$this->queryAulas = $queryAulas;
 
 		}

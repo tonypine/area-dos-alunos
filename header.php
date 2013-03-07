@@ -1,16 +1,4 @@
-<?php
-
-	session_start();
-	global $aluno;
-	if($_SESSION['logged']):
-
-		/* instanciate the SESSION for be accessible on all requires */
-		require_once 'php/aluno.class.php';	
-		$aluno = new aluno($_SESSION['codUnidade'], $_SESSION['codCurso'], $_SESSION['ctr']); 
-		// $aluno->getAluno(); 
-
-	endif;
-	?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <!--[if IE 6]>
 <html id="ie6">
@@ -37,7 +25,7 @@
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
-	<body>
+	<body onload="loadS();">
 
 		<!-- facebook -->
 		<div id="fb-root"></div>
