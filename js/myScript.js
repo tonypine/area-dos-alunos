@@ -66,6 +66,7 @@
 				$("#mainNav a").click( 
 					$.proxy( function (e) {
 						var url = $(e.target).prop('href');
+						$('#meio').children().css('opacity','0.3');
 						//methods.route.apply(this, [url]);
 					}, this));
 			});
@@ -107,27 +108,35 @@
 				loadScript(url+'/../../../wp-includes/js/comment-reply.min.js', {id:'comment-reply'});
 
 			$('body').addClass('wait');
+			$('#meio').children().css('opacity','0.3');
 			$.ajax({
 				type:   'GET',
 				url:    url + '/_get-' + hash + '.php',
 				data: 	{ _s: session, slug: slug },
+				cache: 	false,
 				success: function (r) {
-					$('body').removeClass('wait');
-					methods.html(r);
+					methods.render.apply($("#meio"), [r] );
 				},
 				error: function (r) {
 					$.ajax({
 						type:   'GET',
 						url:    url + '/_get-default.php',
-						data: session,
-						success: function (r) {
-							$('body').removeClass('wait');
-							$("#meio").html(r);
-						},
+						cache: 	false,
+						data: 	session,
+						success: $.proxy( methods.render, $("#meio"), response ),
 						error: function (r) {
 							console.log('route error');
 						}
 					});
+				}
+			});
+		},
+		render: function ( html ) {
+			$('body').removeClass('wait');
+			methods.html( html );
+			$(".attachment-excerpt-thumb, .imgAnchor img").imagesLoaded({
+				done: function ( $images ) {
+					$images.adjustVRhythm();
 				}
 			});
 		}
@@ -250,12 +259,11 @@ $(document).ready(function() {
 	/* ============================================== */
 	/* Set Height for Vertical Rhythm of images
 	/* ============================================ */
-	$(".attachment-excerpt-thumb, .imgAnchor img").adjustVRhythm();
-	$(".attachment-excerpt-thumb, .imgAnchor img").live('load', function(){
-		alert('oi');
-		$(this).adjustVRhythm();
+	$(".attachment-excerpt-thumb, .imgAnchor img, .aThumb img").imagesLoaded({
+		done: function ( $images ) {
+			$images.adjustVRhythm();
+		}
 	});
-
 
 	function ajax() {
 

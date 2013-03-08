@@ -1,148 +1,162 @@
-	<article class="excerpt-article">
-		<h1>Frequência</h1>
-		<?php
-		import_request_variables('g');
+<?php
 
+	import_request_variables('g');
+	$_s = (object) $_s;
+	$gzfile = "cache/".$_s->ctr."/frequencia-".$_s->ctr.".gz";
+
+	if (file_exists($gzfile) && (int) date("d", filemtime($gzfile)) == (int) date("d")):
+	    // echo "gzip was last modified: " . (int) date("d", filemtime($gzfile)) . "<br><br>";
+		@readgzfile($gzfile);
+	else:
 		$loadFile = "../../../wp-load.php";
 		if (file_exists($loadFile))
 		    require_once($loadFile);
 
-		$args = array(
-				'post_type'		=> 'page',
-				'pagename'		=> 'frequencia'
-			);
+		$output = ''; 
+		$output .= "<article class='excerpt-article'>";
+			$output .= "<h1>Frequência</h1>";
 
-		$q = new WP_Query( $args );
+			$q = new WP_Query( array(
+					'post_type'		=> 'page',
+					'pagename'		=> 'frequencia'
+				) );
 
-		while($q->have_posts()): $q->the_post();
-			the_content();
-		endwhile; 
+			while($q->have_posts()): $q->the_post();
+				$output .= "<p>";
+				$output .= get_the_content();
+				$output .= "</p>";
+			endwhile;
 
-		require_once 'php/aluno.class.php';
-		$_s = (object) $_s;
-		$aluno = new aluno($_s->codUnidade, $_s->codCurso, $_s->ctr);
-		$aluno->getAluno();
-		$aluno->doQueryAulas();
-		$aluno->getFrequency();	?>
+			require_once 'php/aluno.class.php';
 
-		<!-- =========================================== -->
-		<!-- Frequência no curso todo -->
-		<!-- =========================================== -->
+			$aluno = new aluno($_s->codUnidade, $_s->codCurso, $_s->ctr);
+			$aluno->getAluno();
+			$aluno->doQueryAulas();
+			$aluno->getFrequency();	
 
-		<div class="freqPercent">
-			<h4>Frequência no curso inteiro</h4>
-			<div class="percentBar">
-				<?php 
-				$p = $aluno->freq->totalPorcentagem;
-				$class = "bar";
-				if($p < 75)
-					$class .= " red";
-				else
-					$class .= " green";
-				?>
-				<div class="<?php echo $class; ?>" style="width: <?php echo $p; ?>%;"></div>
-			</div>
-			<p class="num"><?php echo $aluno->freq->totalPorcentagem."%"; ?></p>
-		</div>
-		<table id="listaFaltas">
-			<thead>
-				<tr>
-					<td>Total de Aulas</td>
-					<td>Total de Presenças</td>
-					<td>Total de Faltas</td>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-				echo "<tr>";
-				echo "<td class='modulo'>".$aluno->freq->total."</td>";
-				echo "<td class='modulo'>".$aluno->freq->totalPresencas."</td>";
-				echo "<td class='modulo'>".$aluno->freq->totalFaltas."</td>";
-				echo "</tr>";
-				echo '</table>'
-				?>
-			</tbody>
-		</table>
+			/* =========================================== */
+			/* Frequência no curso todo */
+			/* =========================================== */
 
-		<!-- Se a a frequência é menor que 75%, procure a coordenação -->
-		<?php if($p < 75)
-				echo "<p class='badAlert'>Você tem apenas $p% de presenças, <strong>procure a coordenação</strong> o quanto antes para marcar sua reposição.</p>"; ?>
+			$output .= "<div class='freqPercent'>";
+				$output .= "<h4>Frequência no curso inteiro</h4>";
+				$output .= "<div class='percentBar'>";
 
-		<!-- =========================================== -->
-		<!-- Porcentagem de faltas por módulo -->
-		<!-- =========================================== -->
-		
-		<h3>Frquência por módulo</h3>
-		<ul>
-		<?php foreach ($aluno->freq->modulos as $key => $m): 
-			$liClass = '';
-			if(!$m->iniciado):
-				$liModClass = 'disabled'; 
-				$naoIniciado = ' (módulo não iniciado)';
-			endif;
-			?>
-			<li class="<?php echo $liModClass; ?>">
-				<div class="freqMiniPercent">
-					<h4><?php echo $m->name . $naoIniciado; ?></h4>
-					<div class="percentBar">
-						<?php 
-						$p = $m->porcentagem;
-						$class = "bar";
-						if($p < 75)
-							$class .= " red";
-						else
-							$class .= " green";
-						?>
-						<div class="<?php echo $class; ?>" style="width: <?php echo $p; ?>%;"></div>
-					</div>
-					<p class="num"><?php echo $p."%"; ?></p>
-				</div>
-				<table id="listaFaltas">
-					<thead>
-						<tr>
-							<td>Total de Aulas</td>
-							<td>Presenças</td>
-							<td>Faltas</td>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						echo "<tr>";
-						echo "<td class='modulo'>".$m->total."</td>";
-						echo "<td class='modulo'>".$m->presencas."</td>";
-						echo "<td class='modulo'>".$m->faltas."</td>";
-						echo "</tr>";
-						echo '</table>'
-						?>
-					</tbody>
-				</table>
-			</li>
-		<?php endforeach; ?>
-		</ul>
-		
-		<!-- ============================ -->
-		<!-- Lista de Faltas -->
-		<!-- ============================ -->
-		<h3>Lista de faltas</h3>
-		<table id="listaFaltas">
-			<thead>
-				<tr>
-					<td>Data da falta</td>
-					<td>Módulo</td>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-				/* --------------------- */
-				/* loop de faltas
-				/* ------------------- */
-				foreach($aluno->freq->faltas as $key => $f):
-					echo "<tr>";
-					echo "<td class='dataFalta'>".$f->falta."</td>";
-					echo "<td class='modulo'>".utf8_encode( formatText( $f->modulo ) )."</td>";
-					echo "</tr>";
-				endforeach;
-				?>
-			</tbody>
-		</table>
-	</article>
+					$p = $aluno->freq->totalPorcentagem;
+					$class = "bar";
+					if($p < 75) $class .= " red";
+					else $class .= " green";
+
+					$output .= "<div class='".$class."' style='width: ".$p."%;'></div>";
+				$output .= "</div>";
+				$output .= "<p class='num'>".$aluno->freq->totalPorcentagem."%</p>";
+			$output .= "</div>";
+			$output .= "<table id='listaFaltas'>";
+				$output .= "<thead>";
+					$output .= "<tr>";
+						$output .= "<td>Total de Aulas</td>";
+						$output .= "<td>Total de Presenças</td>";
+						$output .= "<td>Total de Faltas</td>";
+					$output .= "</tr>";
+				$output .= "</thead>";
+				$output .= "<tbody>";
+					$output .= "<tr>";
+					$output .= "<td class='modulo'>".$aluno->freq->total."</td>";
+					$output .= "<td class='modulo'>".$aluno->freq->totalPresencas."</td>";
+					$output .= "<td class='modulo'>".$aluno->freq->totalFaltas."</td>";
+					$output .= "</tr>";
+				$output .= "</tbody>";
+			$output .= "</table>";
+
+			/* Se a a frequência é menor que 75%, procure a coordenação */
+			if($p < 75)
+				$output .= "<p class='badAlert'>Você tem apenas ".$p."% de presenças, <strong>procure a coordenação</strong> o quanto antes para marcar sua reposição.</p>";
+
+			/* =========================================== */
+			/* Porcentagem de faltas por módulo */
+			/* =========================================== */
+			
+			$output .= "<h3>Frquência por módulo</h3>";
+			$output .= "<ul>";
+
+			foreach ($aluno->freq->modulos as $key => $m): 
+				$liClass = '';
+				if(!$m->iniciado):
+					$liModClass = 'disabled'; 
+					$naoIniciado = ' (módulo não iniciado)';
+				endif;
+
+				$output .= "<li class='".$liModClass."'>";
+					$output .= "<div class='freqMiniPercent'>";
+						$output .= "<h4>".$m->name . $naoIniciado."</h4>";
+						$output .= "<div class='percentBar'>";
+
+							$p = $m->porcentagem;
+							$class = "bar";
+							if($p < 75) $class .= " red";
+							else $class .= " green";
+
+							$output .= "<div class='".$class."' style='width: ".$p."%'></div>";
+						$output .= "</div>";
+						$output .= "<p class='num'>".$p."%</p>";
+					$output .= "</div>";
+					$output .= "<table id='listaFaltas'>";
+						$output .= "<thead>";
+							$output .= "<tr>";
+								$output .= "<td>Total de Aulas</td>";
+								$output .= "<td>Presenças</td>";
+								$output .= "<td>Faltas</td>";
+							$output .= "</tr>";
+						$output .= "</thead>";
+						$output .= "<tbody>";
+							$output .= "<tr>";
+							$output .= "<td class='modulo'>".$m->total."</td>";
+							$output .= "<td class='modulo'>".$m->presencas."</td>";
+							$output .= "<td class='modulo'>".$m->faltas."</td>";
+							$output .= "</tr>";
+							$output .= '</table>';
+						$output .= "</tbody>";
+					$output .= "</table>";
+				$output .= "</li>";
+			endforeach;
+			
+			$output .= "</ul>";
+			
+			/* ============================ */
+			/* Lista de Faltas */
+			/* ============================ */
+
+			$output .= "<h3>Lista de faltas</h3>";
+			$output .= "<table id='listaFaltas'>";
+				$output .= "<thead>";
+					$output .= "<tr>";
+						$output .= "<td>Data da falta</td>";
+						$output .= "<td>Módulo</td>";
+					$output .= "</tr>";
+				$output .= "</thead>";
+				$output .= "<tbody>";
+
+					/* --------------------- */
+					/* loop de faltas
+					/* ------------------- */
+					foreach($aluno->freq->faltas as $key => $f):
+						$output .= "<tr>";
+						$output .= "<td class='dataFalta'>".$f->falta."</td>";
+						$output .= "<td class='modulo'>".utf8_encode( formatText( $f->modulo ) )."</td>";
+						$output .= "</tr>";
+					endforeach;
+
+				$output .= "</tbody>";
+			$output .= "</table>";
+		$output .= "</article>";
+
+		if(!is_dir("cache/".$_s->ctr."/"))
+			mkdir("cache/".$_s->ctr."/");
+
+		$fp = gzopen($gzfile, 'w9');
+		gzwrite($fp, $output);
+		gzclose($fp);
+
+		echo $output;
+
+	endif;

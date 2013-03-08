@@ -1,49 +1,71 @@
-	<article class="excerpt-article">
-		<h1>Boletim</h1>
-		<?php
-		import_request_variables('g');
+<?php
 
+	import_request_variables('g');
+	$_s = (object) $_s;
+	$gzfile = "cache/".$_s->ctr."/boletim-".$_s->ctr.".gz";
+
+	if (file_exists($gzfile) && (int) date("d", filemtime($gzfile)) == (int) date("d")):
+	    // echo "gzip was last modified: " . (int) date("d", filemtime($gzfile)) . "<br><br>";
+		@readgzfile($gzfile);
+	else:
 		$loadFile = "../../../wp-load.php";
 		if (file_exists($loadFile))
 		    require_once($loadFile);
 
-		$bArgs = array(
-				'post_type'		=> 'page',
-				'pagename'		=> 'boletim'
-			);
+		$output = ''; 
+		$output .= "<article class='excerpt-article'>";
+			$output .= "<h1>Boletim</h1>";
 
-		$bQuery = new WP_Query( $bArgs );
+			$bArgs = 
 
-		while($bQuery->have_posts()): $bQuery->the_post();
-			the_content();
-		endwhile;
+			$bQuery = new WP_Query( array(
+					'post_type'		=> 'page',
+					'pagename'		=> 'boletim'
+				) );
 
-		require_once 'php/aluno.class.php';
-		$_s = (object) $_s;
-		$aluno = new aluno($_s->codUnidade, $_s->codCurso, $_s->ctr);
-		$aluno->getAluno();
-		$aluno->getModulos();
+			while($bQuery->have_posts()): $bQuery->the_post();
+				$output .= "<p>";
+				$output .= get_the_content();
+				$output .= "</p>";
+			endwhile;
 
-		/* --------------------- */
-		/* Table of notes
-		/* ------------------- */
-		echo '<table id="listaNotas">';
-		foreach($aluno->modulos as $key => $m):
-			if($m->nota):
-				if($m->nota > 7):
-					$class = 'aprovado';
-				elseif($m->nota < 7):
-					$class = 'reprovado';
+			require_once 'php/aluno.class.php';
+			$aluno = new aluno($_s->codUnidade, $_s->codCurso, $_s->ctr);
+			$aluno->getAluno();
+			$aluno->getModulos();
+
+			/* --------------------- */
+			/* Table of notes
+			/* ------------------- */
+			$output .= '<table id="listaNotas">';
+			foreach($aluno->modulos as $key => $m):
+				if($m->nota):
+					if($m->nota > 7):
+						$class = 'aprovado';
+					elseif($m->nota < 7):
+						$class = 'reprovado';
+					endif;
+					$nota = $m->nota . ' Pontos';
+				else:
+					$class = '';
+					$nota = "--";
 				endif;
-				$nota = $m->nota . ' Pontos';
-			else:
-				$class = '';
-				$nota = "--";
-			endif;
-			echo "<tr class='".$class."'>";
-			echo "<td class='nota'>".$nota."</td><td class='modulo'>".$m->descricao."</td>";
-			echo "</tr>";
-		endforeach;
-		echo '</table>';
-		?>
-	</article>
+				$output .= "<tr class='".$class."'>";
+				$output .= "<td class='nota'>".$nota."</td><td class='modulo'>".$m->descricao."</td>";
+				$output .= "</tr>";
+			endforeach;
+			$output .= '</table>';
+		$output .= "</article>";
+
+		if(!is_dir("cache/".$_s->ctr."/"))
+			mkdir("cache/".$_s->ctr."/");
+
+		$fp = gzopen($gzfile, 'w9');
+		gzwrite($fp, $output);
+		gzclose($fp);
+
+		echo $output;
+
+	endif;
+
+?>
