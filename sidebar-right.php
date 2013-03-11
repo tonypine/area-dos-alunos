@@ -1,4 +1,3 @@
-	
 	<div id="rightSideBar">
 		<aside id="aEvento">
 			<?php
@@ -10,12 +9,13 @@
 				$eventQuery = new WP_Query( $eventArgs );
 				//dump($eventQuery);	
 				while ($eventQuery->have_posts()): $eventQuery->the_post();
+					$pLink = $wpurl."/#/post/".basename(get_permalink());
 					echo "<h3 class='orangeDot'>Próximo evento</h3>";
-					echo "<a class='aThumb' href='".get_permalink()."'>".get_the_post_thumbnail( $post_id = get_the_ID(), $size = 'excerpt-event-thumb')."</a>";
-					echo "<h4><a href='".get_permalink()."'>".get_the_title()."</a></h4>";
+					echo "<a class='aThumb' href='".$pLink."'>".get_the_post_thumbnail( $post_id = get_the_ID(), $size = array(334, 220))."</a>";
+					echo "<h4><a href='".$pLink."'>".get_the_title()."</a></h4>";
 					echo get_the_excerpt();
 					echo "<p>";
-					echo "<a class='leiaMais' href='".get_permalink()."''>continuar lendo →</a>";
+					echo "<a class='leiaMais' href='".$pLink."''>continuar lendo →</a>";
 					echo "</p>";
 				endwhile;
 			 ?>

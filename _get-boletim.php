@@ -16,14 +16,12 @@
 		$output .= "<article class='excerpt-article'>";
 			$output .= "<h1>Boletim</h1>";
 
-			$bArgs = 
-
-			$bQuery = new WP_Query( array(
+			$q = new WP_Query( array(
 					'post_type'		=> 'page',
 					'pagename'		=> 'boletim'
 				) );
 
-			while($bQuery->have_posts()): $bQuery->the_post();
+			while($q->have_posts()): $q->the_post();
 				$output .= "<p>";
 				$output .= get_the_content();
 				$output .= "</p>";

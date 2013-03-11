@@ -1,4 +1,6 @@
-﻿<?php get_header(); ?>
+﻿<?php 
+$wpurl = get_bloginfo( 'wpurl' );
+get_header(); ?>
 
 	<div id="content" class="cf">
 		<?php if($_SESSION['logged']):

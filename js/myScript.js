@@ -20,6 +20,7 @@
 				height: 'auto',
 				width: 'auto'
 			});
+			console.log(_this.height() + 'x' + _this.width());
 		},
 		adjust: function() {
 			methods.reset.apply( this );
@@ -52,7 +53,7 @@
 /* =====================================================*/
 
 (function ($) {
-
+	var ajax;
 	var methods = {
 		init: function (options) {
 			return this.each(function() {
@@ -78,17 +79,37 @@
 			if(!patHash.test(href))
 				return false;
 
-			var pattern = /^#[\/]*([\w\d-]+)[\/]*([\w\d-]*)[\/]*/g;
+			var pattern = /^#[\/]*([\w\d-]+)[\/]*([\w\d-]*)[\/]*([\w\d-]*)[\/]*/g;
 			if(typeof url === 'undefined' || typeof url === 'object') {
 				var hash = window.location.hash.replace( pattern, "$1");
 				var slug = window.location.hash.replace( pattern, "$2");
+				var page = window.location.hash.replace( pattern, "$3");
 			} else {
 				var hash = $.fn.basename(url).replace( pattern, "$1");
 				var slug = window.location.hash.replace( pattern, "$2");
+				var page = window.location.hash.replace( pattern, "$3");
 			}
-			hash = hash === '' || hash === '#/' ? 'default' : hash;
+
+			if(!isNaN(hash) && page == '') {
+				page = hash;
+				hash = 'default';
+			} else if(!isNaN(slug)) {
+				page = slug;
+				slug = '';
+			} else {
+				hash = hash === '' || hash === '#/' ? 'default' : hash;
+			}
 			var f = $(this).data('routes')[ $.fn.basename( hash ) ];
-			typeof f === "function" ? f(hash, slug) : $(this).data('routes')['default'](hash, slug)
+
+			var data = {
+				'hash': hash,
+				'slug': slug,
+				'page': page === "" ? 1 : page
+			};
+
+			console.log(data.hash);
+
+			typeof f === "function" ? f( data ) : $(this).data('routes')['default'](data)
 		},
 		html: function ( html ) {
 			var m = $('#meio').children();
@@ -103,27 +124,37 @@
 				left: 0
 			}, 100);
 		},
-		get: function ( hash, slug ) {
-			if(hash == 'post')
+		get: function ( d ) {
+
+			console.log( d );
+
+			if(ajax)
+				ajax.abort();
+			
+			if(d.hash == 'post')
 				loadScript(url+'/../../../wp-includes/js/comment-reply.min.js', {id:'comment-reply'});
 
 			$('body').addClass('wait');
 			$('#meio').children().css('opacity','0.3');
-			$.ajax({
+			ajax = $.ajax({
 				type:   'GET',
-				url:    url + '/_get-' + hash + '.php',
-				data: 	{ _s: session, slug: slug },
+				url:    url + '/_get-' + d.hash + '.php',
+				data: 	{ _s: session, slug: d.slug, p: d.page, hash: d.hash },
 				cache: 	false,
 				success: function (r) {
 					methods.render.apply($("#meio"), [r] );
 				},
 				error: function (r) {
-					$.ajax({
+					if(ajax)
+						ajax.abort();
+					ajax = $.ajax({
 						type:   'GET',
 						url:    url + '/_get-default.php',
 						cache: 	false,
 						data: 	session,
-						success: $.proxy( methods.render, $("#meio"), response ),
+						success: function (r) {
+							methods.render.apply($("#meio"), [r] );
+						},
 						error: function (r) {
 							console.log('route error');
 						}
@@ -139,6 +170,7 @@
 					$images.adjustVRhythm();
 				}
 			});
+			$('html, body').scrollTop(0);
 		}
 	};
 
@@ -281,7 +313,7 @@ $(document).ready(function() {
 					var template = $("#t_uInfo").html();
 					var output = Mustache.render( template, r );
 					$('#uInfo').html(output);
-					alert($("#uInfo").html());
+					// alert($("#uInfo").html());
 				}
 			})
 			

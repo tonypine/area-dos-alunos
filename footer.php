@@ -33,6 +33,7 @@
 		};
 	</script>
 	
+    <!-- uInfo TEMPLATE -->
 	<script id="t_uInfo" type="text/html">
 	<tbody>
 		<tr>
@@ -49,6 +50,31 @@
 		</tr>
 	</tbody>
 	</script>
+
+    <!-- Paginação TEMPLATE -->
+    <script type="text/html" id="paginationTemplate">
+        {{# if(data.page > 1){ }}
+            <a class="btnFirst" href="1">Primeira</a>
+            <a class="btnPrev" href="{{ data.page - 1 }}">◄</a>
+        {{# } }}
+
+        {{# if(data.page <= 3 || data.numPages < 6) {   var pageInit = 1;   } 
+            else {                                      var pageInit = data.page - 2; }         
+
+            for(var i = pageInit; i <= 5; i++) {                    }}
+
+                <a {{# if(data.page == i) { }} class='btnNav pAtiva' href=''
+                    {{# } else { }}class="btnNav" href='{{ i }}' {{# } }}
+                    >{{ i }}</a>
+
+        {{#     if(i >= data.numPages) break;
+            } }}
+
+        {{# if(data.page < data.numPages){ }}
+            <a class="btnNext" href="{{ data.page + 1 }}">►</a>
+            <a class="btnLast" href="{{ data.numPages }}">Última</a>
+        {{# } }}
+    </script>
   
   	<script type="text/javascript" src="<?php url(); ?>/js/plugins.js"></script>
 	<script type="text/javascript">

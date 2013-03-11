@@ -33,7 +33,7 @@
 		<div id="mainContainer">
 			<header id="mainHeader">
 				<div id="mHeaderIn">
-					<a id="logoMicrocamp" href="#"><img src="<?php url(); ?>/images/logo-microcamp-sp.jpg"/></a>
+					<a id="logoMicrocamp" href="#"><img src="<?php url(); ?>/images/logo-microcamp-sp.png"/></a>
 
 					<?php 
 					/* ================================= */
@@ -114,3 +114,4 @@
 					<?php endif; ?>
 				</div>
 			</header>
+			<hr id="topShadow">
