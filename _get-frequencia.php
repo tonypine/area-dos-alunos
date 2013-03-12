@@ -5,7 +5,6 @@
 	$gzfile = "cache/".$_s->ctr."/frequencia-".$_s->ctr.".gz";
 
 	if (file_exists($gzfile) && (int) date("d", filemtime($gzfile)) == (int) date("d")):
-	    // echo "gzip was last modified: " . (int) date("d", filemtime($gzfile)) . "<br><br>";
 		@readgzfile($gzfile);
 	else:
 		$loadFile = "../../../wp-load.php";

@@ -1,4 +1,5 @@
 			<footer id="main">
+				<div id="bottomShadow"></div>
 				<div id="fooIn">
 				<p style="float: left">ACESSE TAMBÉM  ^_^</p> 
 					<ul id="fooIcons" class="cf">

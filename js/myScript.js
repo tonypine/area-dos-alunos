@@ -20,7 +20,6 @@
 				height: 'auto',
 				width: 'auto'
 			});
-			console.log(_this.height() + 'x' + _this.width());
 		},
 		adjust: function() {
 			methods.reset.apply( this );
@@ -64,33 +63,45 @@
 				}, options) );
 				methods.route.apply(this);
 				addHashChange( $.proxy( methods.route, this ) );
-				$("#mainNav a").click( 
+				/*$("#mainNav a").click( 
 					$.proxy( function (e) {
 						var url = $(e.target).prop('href');
 						$('#meio').children().css('opacity','0.3');
-						//methods.route.apply(this, [url]);
-					}, this));
+						methods.route.apply(this, [url]);
+					}, this));*/
 			});
 		},
 		route: function (url) {
 			/* if is a normal page, return false */
-			var href = window.location.href;
+
+			var loc = window.location;
+			var _hash = loc.hash;
+			var href = loc.href;
+
 			var patHash = /\/#/g;
+
+			if( _hash === "" ) {
+				loc.hash = "#/";
+				return false;
+			} 
+
 			if(!patHash.test(href))
 				return false;
 
 			var pattern = /^#[\/]*([\w\d-]+)[\/]*([\w\d-]*)[\/]*([\w\d-]*)[\/]*/g;
 			if(typeof url === 'undefined' || typeof url === 'object') {
-				var hash = window.location.hash.replace( pattern, "$1");
-				var slug = window.location.hash.replace( pattern, "$2");
-				var page = window.location.hash.replace( pattern, "$3");
+				var hash = _hash.replace( pattern, "$1");
+				var slug = _hash.replace( pattern, "$2");
+				var page = _hash.replace( pattern, "$3");
 			} else {
 				var hash = $.fn.basename(url).replace( pattern, "$1");
-				var slug = window.location.hash.replace( pattern, "$2");
-				var page = window.location.hash.replace( pattern, "$3");
+				var slug = $.fn.basename(url).replace( pattern, "$2");
+				var page = $.fn.basename(url).replace( pattern, "$3");
 			}
 
-			if(!isNaN(hash) && page == '') {
+			alert(hash + "-" + slug + "-" + page)
+
+			if(!isNaN(hash)) {
 				page = hash;
 				hash = 'default';
 			} else if(!isNaN(slug)) {
@@ -106,8 +117,6 @@
 				'slug': slug,
 				'page': page === "" ? 1 : page
 			};
-
-			console.log(data.hash);
 
 			typeof f === "function" ? f( data ) : $(this).data('routes')['default'](data)
 		},
@@ -126,8 +135,6 @@
 		},
 		get: function ( d ) {
 
-			console.log( d );
-
 			if(ajax)
 				ajax.abort();
 			
@@ -136,6 +143,8 @@
 
 			$('body').addClass('wait');
 			$('#meio').children().css('opacity','0.3');
+
+
 			ajax = $.ajax({
 				type:   'GET',
 				url:    url + '/_get-' + d.hash + '.php',
@@ -151,7 +160,7 @@
 						type:   'GET',
 						url:    url + '/_get-default.php',
 						cache: 	false,
-						data: 	session,
+						data: 	{ _s: session, slug: d.slug, p: d.page, hash: d.hash },
 						success: function (r) {
 							methods.render.apply($("#meio"), [r] );
 						},
@@ -201,7 +210,7 @@ $(window).route();
 				erro : '.msgErro',
 				msg : '.msg',
 				textMsg : 'Entrando ...',
-				textErro : 'Login invรกlido. Tente novamente xD',
+				textErro : 'Login inválido. Tente novamente.',
 				loader : '.loader'
 			}, options);
 
@@ -242,7 +251,7 @@ $(window).route();
 				}, 1500);
 			} else {
 				$this.find('.popup .msg').text('Redirecionando ...');
-				window.location = window.location.href + "#/";
+				window.location.reload();
 			}
 		},
 		error : function() {

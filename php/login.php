@@ -31,13 +31,6 @@ $user->store_result();
 $user->bind_result($codUnidade, $cod, $pass, $level, $ativo);
 $user->fetch();
 
-/* Definindo as variáveis de sessão */
-$_SESSION['codUnidade'] = $codUnidade;
-$_SESSION['codCurso'] = substr($usuario, 0, 3);
-$_SESSION['ctr'] = substr($usuario, 3, 8);
-$_SESSION['level'] = $level;
-$_SESSION['logged'] = 1;
-
 $response = (object) Array(
 		'message' 	=> '',
 		'login'		=> 0,
@@ -47,6 +40,13 @@ $response = (object) Array(
 /* Verificando se o retorno é uma única linha */
 
 if($user->num_rows == "1"):
+
+	/* Definindo as variáveis de sessão */
+	$_SESSION['codUnidade'] = $codUnidade;
+	$_SESSION['codCurso'] = substr($usuario, 0, 3);
+	$_SESSION['ctr'] = substr($usuario, 3, 8);
+	$_SESSION['level'] = $level;
+	$_SESSION['logged'] = 1;
 	
 	if($ativo)
 		$response->login = 1;

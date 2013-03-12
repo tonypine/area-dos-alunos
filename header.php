@@ -21,9 +21,11 @@
 		<link rel="stylesheet" type="text/css" media"all" href="<?php url(); ?>/css/style.css?v=1" />
 		
 		<!-- IE Fix for HTML5 Tags -->
-		<!--[if lt IE 9]>
-			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+        <!--[if lt IE 9]>
+	        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700|Open+Sans:400,700" type="text/css">
+	        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	        <script src="<?php url(); ?>/js/respond.js"></script>
+        <![endif]-->
 	</head>
 	<body onload="loadS();">
 
