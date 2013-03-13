@@ -99,7 +99,6 @@
 				var page = $.fn.basename(url).replace( pattern, "$3");
 			}
 
-			alert(hash + "-" + slug + "-" + page)
 
 			if(!isNaN(hash)) {
 				page = hash;
@@ -110,13 +109,15 @@
 			} else {
 				hash = hash === '' || hash === '#/' ? 'default' : hash;
 			}
+			
 			var f = $(this).data('routes')[ $.fn.basename( hash ) ];
 
 			var data = {
 				'hash': hash,
-				'slug': slug,
-				'page': page === "" ? 1 : page
+				'slug': slug === "#/" ? '' : slug,
+				'page': page === "" || page === "#/" ? 1 : page
 			};
+
 
 			typeof f === "function" ? f( data ) : $(this).data('routes')['default'](data)
 		},
@@ -148,7 +149,7 @@
 			ajax = $.ajax({
 				type:   'GET',
 				url:    url + '/_get-' + d.hash + '.php',
-				data: 	{ _s: session, slug: d.slug, p: d.page, hash: d.hash },
+				data: 	{ _s: session, slug: d.slug, p: d.page, hash: d.hash, url: url },
 				cache: 	false,
 				success: function (r) {
 					methods.render.apply($("#meio"), [r] );
@@ -298,12 +299,22 @@ $(document).ready(function() {
 
 
 	/* ============================================== */
-	/* Set Height for Vertical Rhythm of images
+	/* Set Height for Vertical Rhythm of images */
 	/* ============================================ */
 	$(".attachment-excerpt-thumb, .imgAnchor img, .aThumb img").imagesLoaded({
 		done: function ( $images ) {
 			$images.adjustVRhythm();
 		}
+	});
+
+	/* ============================================== */
+	/* Manage active state of sidebar */
+	/* ============================================ */
+	$(".navMenu a").click(function (e) {
+		$(".navMenu a").each(function (e) {
+			$(this).removeClass('active');
+		});
+		$(this).addClass('active');
 	});
 
 	function ajax() {
@@ -322,7 +333,6 @@ $(document).ready(function() {
 					var template = $("#t_uInfo").html();
 					var output = Mustache.render( template, r );
 					$('#uInfo').html(output);
-					// alert($("#uInfo").html());
 				}
 			})
 			
@@ -332,4 +342,8 @@ $(document).ready(function() {
 	}
 
 	ajax();
+
+	/* =============== */
+	/* draggable */
+	$("#rightSideBar").slimScroll({ height: '760px' });
 });

@@ -21,7 +21,7 @@
 					$catLength = (int) sizeof($c);
 					foreach ($c as $cat) {
 						$iCat++;
-						$output .= "<a href='".$url."/#/".basename(get_category_link($cat->term_id ))."'>".$cat->name."<a/>";
+						$output .= "<a href='".$url."/#/category/".basename(get_category_link($cat->term_id ))."'>".$cat->name."<a/>";
 						if($iCat < $catLength) $output .= ", ";
 					}
 

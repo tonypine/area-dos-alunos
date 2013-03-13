@@ -14,7 +14,10 @@
 
 		$output = ''; 
 		$output .= "<article class='excerpt-article'>";
-			$output .= "<h1>Boletim</h1>";
+			$output .= "<header>";
+				$output .= "<h1>Boletim</h1>";
+				$output .= "<hr class='bottomLine'>";
+			$output .= "</header>";
 
 			$q = new WP_Query( array(
 					'post_type'		=> 'page',

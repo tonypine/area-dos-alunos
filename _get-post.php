@@ -1,73 +1,51 @@
-<?php 
+<?php
 
-    import_request_variables('g');
+	import_request_variables('g');
+	$_s = (object) $_s;
+	$gzfile = "cache/posts/post-".$slug.".gz";
 
-    $loadFile = "../../../wp-load.php";
-    if (file_exists($loadFile))
-        require_once($loadFile);
+	if (file_exists($gzfile) && (int) date("d", filemtime($gzfile)) == (int) date("d")):
+		@readgzfile($gzfile);
+	else:
 
-    $args = array(
-            'post_type'     =>  'post',
-            'name'          =>  $slug
-        );
+		/* ======================================= */
+		/* cURL */
+		/* ======================================= */
+			
+			// Aqui entra o action do formulário - pra onde os dados serão enviados
+			$cURL = curl_init();
 
-    $q = new WP_Query( $args );
+			// ?appid=YahooDemo&query=persimmon&results=10
 
-    while ($q->have_posts()): $q->the_post();
+			$file = $url . "/_model-post-content.php";
+			curl_setopt_array($cURL, array(
+					// CURLOPT_URL				=>	"http://search.yahooapis.com/WebSearchService/V1/webSearch",
+					CURLOPT_URL				=>	$file,
+					CURLOPT_POST            =>  false,
+					CURLOPT_VERBOSE         =>  false,
+					// CURLOPT_POSTFIELDS      =>  "appid=YahooDemo&query=persimmon&results=10",
+					CURLOPT_POSTFIELDS      =>  array(
+													'slug' => $slug
+												),
+					CURLOPT_HEADER			=> 	false,
+					CURLOPT_RETURNTRANSFER  =>  true
+				));
 
-        $c = get_the_category();
-        $c = array_slice( $c, 0, 5 );   ?>
+			$output = curl_exec($cURL);
+			// $error 	= curl_error($cURL);
+			curl_close($cURL);
 
-        <article>
-            <h2><?php the_title(); ?></h2>
-            <section class="excerpt-info">
-                <span class="date"><?php echo get_the_date(); ?></span>
-                <span class="cat">Categoria:
-                    <?php 
-                        $iCat = 0;
-                        $catLength = (int) sizeof($c);
-                        foreach ($c as $cat) {
-                            $iCat++;
-                            echo "<a href='".get_category_link($cat->term_id )."'>".$cat->name."<a/>";
-                            if($iCat < $catLength) echo ", ";
-                        } ?>
-                        <!--_.each(p.cat, function (c) { i++; }}
-                            <a href="{{ siteUrl }}/#/categoria/{{ c.slug }}">{{ c.cat_name }}</a>
-                            {{# if(i < p.cat.length) }},
-                    {{# }); }}-->
-                </span>
-            </section>
-            <section class="content">
-                <?php the_content(); ?>
-            </section>
-            <section id="comments">
-                <?php 
-                    $comments = get_comments( array(
-                        'status'    =>  'approve',
-                        'post_id'   =>  get_the_ID()
-                    ) );
+		/* ======================================= */
+		/* # cURL */
+		/* ======================================= */
 
-                    //if has comments
-                    echo "<hr>";
-                    if(sizeof($comments) > 0):
-                        echo "<h3>Comentários</h3>";
-                        echo "<ul class='commentlist'>";
-                        //Display the list of comments
-                        wp_list_comments(array(
-                            'per_page' => 10, //Allow comment pagination
-                            'reverse_top_level' => false, //Show the latest comments at the top of the list
-                            'type' => 'comment',
-                            'callback' => 'mytheme_comment',
-                            'avatar_size' => 44
-                        ), $comments);
-                        echo "</ul>";
-                    endif;
-                    setcom_comment_form(array(
-                        'title_reply' => 'Deixe um comentário',
-                        'title_reply_to' => 'Deixe uma resposta'
-                    ), $postID);
-                ?>
-            </section>
-        </article>
+		if(!is_dir("cache/posts/"))
+			mkdir("cache/posts/");
 
-    <?php endwhile; ?>
+		$fp = gzopen($gzfile, 'w9');
+		gzwrite($fp, $output);
+		gzclose($fp);
+
+		echo $output;
+
+	endif;?>

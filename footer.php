@@ -78,10 +78,12 @@
     </script>
   
   	<script type="text/javascript" src="<?php url(); ?>/js/plugins.js"></script>
+  	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 
 	var session = <?php echo json_encode($_SESSION); ?>;
 		var url = "<?php url(); ?>";
+		var dir = 'C:/xampp/htdocs/alunos/wp-content/themes/alunos';
 		
 		function loadScript(src, op) {
 			var d = document,
@@ -145,7 +147,7 @@
 		function loadS() {
 			loadScript('<?php url(); ?>/js/myScript.js');
 			loadScript('<?php url(); ?>/js/lightbox-min.js', { id: 'lightbox-js' });
-			//loadScript('//connect.facebook.net/pt_BR/all.js#xfbml=1', { id: 'facebook-jssdk' });
+			// loadScript('//connect.facebook.net/pt_BR/all.js#xfbml=1', { id: 'facebook-jssdk' });
 		};
 
 	</script>

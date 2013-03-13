@@ -408,4 +408,52 @@ add_filter('the_content', 'my_addlightboxrel');
 		}
 	}
 
+	/* ================================================ */
+	/* Save gzip on post update */
+	/* ================================================ */
+	function gzip_post($post_ID) {
+
+		if ( !wp_is_post_revision( $post_ID ) ):
+
+			global $url;
+
+			$folder = get_template_directory().'/cache/posts/';
+			$slug 	= basename( get_permalink($post_ID) );
+			$gzfile = $folder."post-".$slug.".gz";
+
+			/* ------------ */
+			/* cURL */
+			/* ------------ */
+				
+				$cURL = curl_init();
+				$file = $url . "/_model-post-content.php";
+				curl_setopt_array($cURL, array(
+					CURLOPT_URL				=>	$file,
+					CURLOPT_POST            =>  false,
+					CURLOPT_VERBOSE         =>  false,
+					CURLOPT_POSTFIELDS      =>  array( 'slug' => $slug ),
+					CURLOPT_HEADER			=> 	false,
+					CURLOPT_RETURNTRANSFER  =>  true
+				));
+				$output = curl_exec($cURL);
+				// $error 	= curl_error($cURL);
+				curl_close($cURL);
+
+			/* ------------ */
+			/* # cURL */
+			/* ------------ */
+
+			if(!is_dir($folder))
+				mkdir($folder);
+
+			$fp = gzopen($gzfile, 'w9');
+			gzwrite($fp, $output);
+			gzclose($fp);
+
+		endif;
+
+	}
+
+	add_action('save_post','gzip_post');
+
 ?>

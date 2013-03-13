@@ -7,6 +7,10 @@
     if (file_exists($loadFile))
         require_once($loadFile);
 
+    /* ======================================== */
+    /* query */
+    /* ====================================== */
+
     $args = array(
             'post_type'         => 'post',
             'posts_per_page'    => 5,
@@ -21,14 +25,25 @@
     require '_model-article-loop.php';
     require '_model-paginacao.php';
 
+
+    /* ======================================== */
+    /* Header */
+    /* ====================================== */
+
     $output = '';
-    $output .= $paginacao;
-    $output .= "<hr>";
+    $output .= "<header><h1>".$cat->name."</h1>";
+        $output .= $paginacao;
+        $output .= "<hr class='bottomLine'>";
+    $output .= "</header>";
+
+    /* ======================================== */
+    /* The Loop */
+    /* ====================================== */
+
     while ($q->have_posts()): $q->the_post();
         $output .= showPost();
     endwhile;
     $output .= "<hr>";
     $output .= $paginacao;
 
-    echo $output;
-    ?>
+    echo $output; ?>

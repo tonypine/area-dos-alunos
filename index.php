@@ -1,5 +1,5 @@
 ﻿<?php 
-$wpurl = get_bloginfo( 'wpurl' );
+$wpurl 		= get_bloginfo( 'wpurl' );
 get_header(); ?>
 
 	<div id="content" class="cf">
