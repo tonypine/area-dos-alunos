@@ -276,6 +276,7 @@ add_filter('the_content', 'my_addlightboxrel');
 	                <?php if ( comments_open( $post_id ) ) : ?>
 	                        <?php do_action( 'comment_form_before' ); ?>
 	                        <div id="respond">
+	                        	<div class='innerBorder'>
 	                                <h3 id="reply-title"><?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?></h3>
 	                                <?php if ( get_option( 'comment_registration' ) && !is_user_logged_in() ) : ?>
 	                                        <?php echo $args['must_log_in']; ?>
@@ -307,6 +308,7 @@ add_filter('the_content', 'my_addlightboxrel');
 	                                                <?php do_action( 'comment_form', $post_id ); ?>
 	                                        </form>
 	                                <?php endif; ?>
+	                            </div>
 	                        </div><!-- #respond -->
 	                        <?php do_action( 'comment_form_after' ); ?>
 	                <?php else : ?>

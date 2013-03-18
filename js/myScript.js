@@ -345,5 +345,5 @@ $(document).ready(function() {
 
 	/* =============== */
 	/* draggable */
-	$("#rightSideBar").slimScroll({ height: '760px' });
+	// $("#rightSideBar").slimScroll({ height: '760px' });
 });

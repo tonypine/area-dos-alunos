@@ -78,7 +78,6 @@
     </script>
   
   	<script type="text/javascript" src="<?php url(); ?>/js/plugins.js"></script>
-  	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 
 	var session = <?php echo json_encode($_SESSION); ?>;

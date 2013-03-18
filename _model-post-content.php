@@ -67,7 +67,9 @@
                     endif;
                     setcom_comment_form(array(
                         'title_reply' => 'Deixe um comentário',
-                        'title_reply_to' => 'Deixe uma resposta'
+                        'title_reply_to' => 'Deixe uma resposta',
+                        'comment_notes_before' => false,
+                        'comment_notes_after' => false
                     ), $postID);
                 ?>
             </section>
