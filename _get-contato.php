@@ -7,9 +7,9 @@
 	/* gzip file */	
 	$gzfile = "cache/pages/p-contato.gz";
 
-	if (!file_exists($gzfile)):
-		@readgzfile($gzfile);
-	else:
+	// if (file_exists($gzfile)):
+	// 	@readgzfile($gzfile);
+	// else:
 
 		/* cURL */
 		require_once 'php/_curl.php';
@@ -28,4 +28,5 @@
 
 		echo $output; 
 
-	endif; ?>
+	// endif; 
+	?>

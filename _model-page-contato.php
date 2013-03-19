@@ -30,38 +30,39 @@
     /* Formulário de Contato */
     /* ====================================== */ ?>
 
-    <form target="sendiFrame" id="frmTrabalhe" class="customForm" action="<?php echo $u; ?>/sendMail.php" method="post" enctype="multipart/form-data">
+    <form target="sendiFrame" id="formContato" class="customForm" action="<?php url(); ?>/php/sendMail.php" method="post" enctype="multipart/form-data">
         <div class="innerBorder">
         
-            <input type="hidden" value="2" name="typeForm" />
-            <iframe src="<?php echo $u; ?>/sendMail.php" class="iframeForm" name="sendiFrame" scrolling="no" height='0'></iframe>   
+            <input type="hidden" value="1" name="typeForm" />
             
-            <label for="nome">Nome completo:</label>
-            <input class="cInput validate" name="nome" type="text" placeholder="" />
+            <p>
+            <label for="nome">Nome:</label>
+            <input class="cInput validate" name="nome" type="text" placeholder="" /></p>
 
+            <p>
             <label for="email">E-Mail:</label>
-            <input class="cInput validate" name="email" type="text" placeholder="email@example.com" />
+            <input class="cInput validate" name="email" type="text" placeholder="email@example.com" /></p>
 
-            <label for="cidade">Cidade:</label>
-            <input class="cInput validate" name="cidade" type="text" placeholder="" />
+            <p>
+            <label for="cidade">Telefone:</label>
+            <input class="cInput validate" name="tel" type="text" placeholder="" /></p>
 
-            <label for="estado">Estado:</label>
-            <input class="cInput validate" name="estado" type="text" placeholder="" />
+            <p>
+            <label for="estado">Assunto:</label>
+            <input class="cInput validate" name="assunto" type="text" placeholder="" /></p>
             
-            <label for="ufile">Currículo:</label>
-            <input class="customFile validate" name="ufile" type="file" />
+            <p id="msgContato">
+            <label for="carta">Mensagem:</label>
+            <textarea class="cTextArea validate" name="message" placeholder="Carta de apresentação"></textarea></p>
             
-            <label for="carta">Carta de apresentação:</label>
-            <textarea class="cTextArea validate" name="carta" placeholder="Carta de apresentação"></textarea>
-            
-            <input class="cBtn" type="submit" value="enviar"/>
+            <p id="btnEnviar">            
+                <input class="cBtn" type="submit" value="enviar"/></p>
+            <iframe src="<?php url(); ?>/php/sendMail.php" class="iframeForm" name="sendiFrame" scrolling="no" style='float:left; margin-top: -5px' width='269' height='44px'></iframe>   
 
-            <div id="frmBoxMessage">
+            <p id="frmBoxMessage">
                 <span id="frmMsg">
-                    <img class="loader" src="<?php echo $u; ?>/images/ajax-loader-white.gif" />
-                    Enviando...
                 </span>
-            </div>
+            </p>
             
         </div>
     </form>
