@@ -208,7 +208,9 @@
 			$queryAulas = $this->mysqli->query($sql) or die ("Erro ao buscar as Aulas.");
 			$this->queryAulas = $queryAulas;
 
-			$this->debug['teste'] = $queryAulas->fetch_object();
+			$a = $queryAulas->fetch_object();
+
+			$this->debug['teste'] = gettype($a->Apurado) . ' -> ' . $a->Apurado;
 
 		}
 		
