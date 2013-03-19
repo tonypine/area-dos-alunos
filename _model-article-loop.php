@@ -39,7 +39,7 @@
 			
 			$output .= "<a class='leiaMais' href='". $pLink ."'>continuar lendo →</a>";
 		$output .= "</article>";
-		if($i < $numPosts) $output .= "<hr>"; 
+		if($i < $numPosts && $i <= 5) $output .= "<hr>"; 
 
 		return $output;
 

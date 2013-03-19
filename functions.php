@@ -204,6 +204,13 @@ add_filter('the_content', 'my_addlightboxrel');
 		<?php endif; ?>
 		<div class="comment-author vcard">
 			<?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['avatar_size'] ); ?>
+		</div>
+		<?php if ($comment->comment_approved == '0') : ?>
+		<em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
+		<br />
+		<?php endif; ?>
+
+		<div class="commentBody">
 			<?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
 			<div class="date"><a id="comment-<?php echo $comment->comment_ID; ?>" class="commentLink" href="javascript:void(0);">
 				<?php
@@ -212,18 +219,12 @@ add_filter('the_content', 'my_addlightboxrel');
 				printf( __('%1$s at %2$s'), $date,  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
 				?>
 			</div>
+			<?php echo "<p class='commentText'>".get_comment_text()."</p>"; ?>
+			<div class="reply">
+				<?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+			</div>
 		</div>
-		<?php if ($comment->comment_approved == '0') : ?>
-		<em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
-		<br />
-		<?php endif; ?>
 
-
-		<?php echo "<p class='commentText'>".get_comment_text()."</p>"; ?>
-
-		<div class="reply">
-			<?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
-		</div>
 		<?php if ( 'div' != $args['style'] ) : ?>
 		</div>
 		<?php endif; ?>
@@ -419,27 +420,39 @@ add_filter('the_content', 'my_addlightboxrel');
 
 			global $url;
 
-			$folder = get_template_directory().'/cache/posts/';
-			$slug 	= basename( get_permalink($post_ID) );
-			$gzfile = $folder."post-".$slug.".gz";
+			$type = get_post_type( $post_ID );
+
+				$slug = basename( get_permalink($post_ID) );
+
+			if(preg_match("/^[\?]/", $slug)):
+				return false;
+			endif;
+
+			if($type == 'post'):
+
+				$folder = get_template_directory().'/cache/posts/';
+				$gzfile = $folder."post-".$slug.".gz";
+
+			elseif($type == 'page'):
+
+				$folder = get_template_directory().'/cache/pages/';
+				$gzfile = $folder."p-".$slug.".gz";
+
+			else:
+				return;
+
+			endif;
 
 			/* ------------ */
 			/* cURL */
 			/* ------------ */
-				
-				$cURL = curl_init();
-				$file = $url . "/_model-post-content.php";
-				curl_setopt_array($cURL, array(
-					CURLOPT_URL				=>	$file,
-					CURLOPT_POST            =>  false,
-					CURLOPT_VERBOSE         =>  false,
-					CURLOPT_POSTFIELDS      =>  array( 'slug' => $slug ),
-					CURLOPT_HEADER			=> 	false,
-					CURLOPT_RETURNTRANSFER  =>  true
-				));
-				$output = curl_exec($cURL);
-				// $error 	= curl_error($cURL);
-				curl_close($cURL);
+
+				require_once 'php/_curl.php';
+				$cURL = new cURL(array(
+						'url' 	=> $url . "/_model-". $type ."-content.php",
+						'slug'	=> $slug
+					));
+				$output = $cURL->exec();
 
 			/* ------------ */
 			/* # cURL */

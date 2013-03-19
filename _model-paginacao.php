@@ -12,14 +12,14 @@
     $numPages = $q->max_num_pages;
 
 	if($numPages > 1):
-		$paginacao .= "<div id='paginacao'>";
+		$paginacao .= "<div id='paginacao'><span>páginas: </span>";
 
 			if($currentPage > 1):
 				$paginacao .= "<a class='btnFirst' href='". $url ."/#/". $p_hash . $p_slug ."1'>Primeira</a>";
-				$paginacao .= "<a class='btnPrev' href='". $url ."/#/". $p_hash . $p_slug . ($currentPage-1) ."'>◄</a>";
+				$paginacao .= "<a class='btnPrev' href='". $url ."/#/". $p_hash . $p_slug . ($currentPage-1) ."'>« Anterior</a>";
 			else:
-				$paginacao .= "<a class='btnFirst pDisabled' href='javascript:void();'>Primeira</a>";
-				$paginacao .= "<a class='btnPrev pDisabled' href='javascript:void();'>◄</a>";
+				// $paginacao .= "<a class='btnFirst pDisabled' href='javascript:void();'>Primeira</a>";
+				// $paginacao .= "<a class='btnPrev pDisabled' href='javascript:void();'>« Anterior</a>";
 			endif;
 
 			if($currentPage <= 3 || $numPages <= 5):
@@ -34,7 +34,7 @@
 
 				$paginacao .= "<a ";
 				if($currentPage == $i):
-					$paginacao .= "class='btnNav pAtiva' href='". $url ."/#/". $p_hash . $p_slug ."'";
+					$paginacao .= "class='btnNav pAtiva' href='javascript:void();'";
 				else:
 					$paginacao .= "class='btnNav' href='". $url ."/#/". $p_hash . $p_slug . $i ."'";
 				endif;
@@ -45,11 +45,11 @@
 			endfor;
 
 			if($currentPage < $numPages):
-				$paginacao .= "<a class='btnNext' href='". $url ."/#/". $p_hash . $p_slug . ($currentPage+1) ."'>►</a>";
+				$paginacao .= "<a class='btnNext' href='". $url ."/#/". $p_hash . $p_slug . ($currentPage+1) ."'>Próxima »</a>";
 				$paginacao .= "<a class='btnLast' href='". $url ."/#/". $p_hash . $p_slug . $numPages ."'>Última</a>";
 			else:
-				$paginacao .= "<a class='btnNext pDisabled' href='javascript:void();'>►</a>";
-				$paginacao .= "<a class='btnLast pDisabled' href='javascript:void();'>Última</a>";
+				// $paginacao .= "<a class='btnNext pDisabled' href='javascript:void();'>Próxima »</a>";
+				// $paginacao .= "<a class='btnLast pDisabled' href='javascript:void();'>Última</a>";
 			endif;
 
 		$paginacao .= "</div>";

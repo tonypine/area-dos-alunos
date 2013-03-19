@@ -13,8 +13,7 @@
     /* ====================================== */
 
 	$args = array(
-            'post_type'     =>  'post',
-            'name'          =>  $slug
+            'pagename'      =>  $slug
         );
 
     $q = new WP_Query( $args );
@@ -53,36 +52,44 @@
             <section class="content">
                 <?php the_content(); ?>
             </section>
-            <section id="comments">
-                <?php 
-                    $comments = get_comments( array(
-                        'status'    =>  'approve',
-                        'post_id'   =>  get_the_ID()
-                    ) );
-
-                    //if has comments
-                    echo "<hr>";
-                    if(sizeof($comments) > 0):
-                        echo "<h3>Comentários</h3>";
-                        echo "<ul class='commentlist'>";
-                        //Display the list of comments
-                        wp_list_comments(array(
-                            'per_page' => 10, //Allow comment pagination
-                            'reverse_top_level' => false, //Show the latest comments at the top of the list
-                            'type' => 'comment',
-                            'callback' => 'mytheme_comment',
-                            'avatar_size' => 44
-                        ), $comments);
-                        echo "</ul>";
-                    endif;
-                    setcom_comment_form(array(
-                        'title_reply' => 'Deixe um comentário',
-                        'title_reply_to' => 'Deixe uma resposta',
-                        'comment_notes_before' => false,
-                        'comment_notes_after' => false
-                    ), $postID);
-                ?>
-            </section>
         </article>
+        <?php $u = get_bloginfo('template_url'); ?>
+
+
+        <form target="sendiFrame" id="frmTrabalhe" class="customForm" action="<?php echo $u; ?>/sendMail.php" method="post" enctype="multipart/form-data">
+            <div class="innerBorder">
+            
+                <input type="hidden" value="2" name="typeForm" />
+                <iframe src="<?php echo $u; ?>/sendMail.php" class="iframeForm" name="sendiFrame" scrolling="no" height='0'></iframe>   
+                
+                <label for="nome">Nome completo:</label>
+                <input class="cInput validate" name="nome" type="text" placeholder="" />
+
+                <label for="email">E-Mail:</label>
+                <input class="cInput validate" name="email" type="text" placeholder="email@example.com" />
+
+                <label for="cidade">Cidade:</label>
+                <input class="cInput validate" name="cidade" type="text" placeholder="" />
+
+                <label for="estado">Estado:</label>
+                <input class="cInput validate" name="estado" type="text" placeholder="" />
+                
+                <label for="ufile">Currículo:</label>
+                <input class="customFile validate" name="ufile" type="file" />
+                
+                <label for="carta">Carta de apresentação:</label>
+                <textarea class="cTextArea validate" name="carta" placeholder="Carta de apresentação"></textarea>
+                
+                <input class="cBtn" type="submit" value="enviar"/>
+
+                <div id="frmBoxMessage">
+                    <span id="frmMsg">
+                        <img class="loader" src="<?php echo $u; ?>/images/ajax-loader-white.gif" />
+                        Enviando...
+                    </span>
+                </div>
+                
+            </div>
+        </form>
 
     <?php endwhile; ?>

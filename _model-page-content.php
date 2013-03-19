@@ -13,8 +13,7 @@
     /* ====================================== */
 
 	$args = array(
-            'post_type'     =>  'post',
-            'name'          =>  $slug
+            'pagename'      =>  $slug
         );
 
     $q = new WP_Query( $args );
@@ -52,36 +51,6 @@
             </header>
             <section class="content">
                 <?php the_content(); ?>
-            </section>
-            <section id="comments">
-                <?php 
-                    $comments = get_comments( array(
-                        'status'    =>  'approve',
-                        'post_id'   =>  get_the_ID()
-                    ) );
-
-                    //if has comments
-                    echo "<hr>";
-                    if(sizeof($comments) > 0):
-                        echo "<h3>Comentários</h3>";
-                        echo "<ul class='commentlist'>";
-                        //Display the list of comments
-                        wp_list_comments(array(
-                            'per_page' => 10, //Allow comment pagination
-                            'reverse_top_level' => false, //Show the latest comments at the top of the list
-                            'type' => 'comment',
-                            'callback' => 'mytheme_comment',
-                            'avatar_size' => 44
-                        ), $comments);
-                        echo "</ul>";
-                    endif;
-                    setcom_comment_form(array(
-                        'title_reply' => 'Deixe um comentário',
-                        'title_reply_to' => 'Deixe uma resposta',
-                        'comment_notes_before' => false,
-                        'comment_notes_after' => false
-                    ), $postID);
-                ?>
             </section>
         </article>
 

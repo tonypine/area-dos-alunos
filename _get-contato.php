@@ -2,9 +2,9 @@
 
 	import_request_variables('g');
 	$_s = (object) $_s;
-	$gzfile = "cache/posts/post-".$slug.".gz";
+	$gzfile = "cache/pages/p-contato.gz";
 
-	if (@file_exists($gzfile)):
+	if (!file_exists($gzfile)):
 		@readgzfile($gzfile);
 	else:
 
@@ -16,8 +16,8 @@
 
 			$output = '';
 			$cURL = new cURL(array(
-					'url' 		=> $url . "/_model-post-content.php",
-					'data'		=> array( 'slug' => $slug )
+					'url' 		=> $url . "/_model-page-contato.php",
+					'data'		=> array( "slug" => $hash )
 				));
 			
 			$output = $cURL->exec();
@@ -26,13 +26,15 @@
 		/* # cURL */
 		/* ======================================= */
 
-		if(!is_dir("cache/posts/"))
-			mkdir("cache/posts/");
+		// $url = get_bloginfo('wpurl');
+
+		if(!is_dir("cache/pages/"))
+			mkdir("cache/pages/");
 
 		$fp = gzopen($gzfile, 'w9');
 		gzwrite($fp, $output);
 		gzclose($fp);
 
-		echo $output;
+		echo $output; 
 
 	endif; ?>

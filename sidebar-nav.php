@@ -33,7 +33,11 @@
 					$i = 0;
 					foreach ( (array) $menu_itens as $menu_item ) {
 						$i = $i + 1;
-						echo "<li><a id='secondary-item".$i."' href='".$site."/#/category/".basename($menu_item->url)."'>".$menu_item->title."</a></li>";
+						$basename = split($site, $menu_item->url); $basename = $basename[1];
+						$basename = preg_replace("/\/$/", "$1", $basename);
+						$basename = preg_replace("/^\//", "$1", $basename);
+						// echo "<!-- ". var_dump( $basename )." -->";
+						echo "<li><a id='secondary-item".$i."' href='".$site."/#/".$basename."'>".$menu_item->title."</a></li>";
 					}
 				?>
 			</ul>
