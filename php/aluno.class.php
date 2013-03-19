@@ -200,7 +200,6 @@
 							ON
 								m.Codigo = a.CodModulo
 								AND m.CodUnidade = a.CodUnidade
-
 					WHERE
 						a.CodTurma = '".$this->info->codTurma."'
 						AND	a.CodUnidade = '".$this->codUnidade."'
@@ -208,6 +207,8 @@
 
 			$queryAulas = $this->mysqli->query($sql) or die ("Erro ao buscar as Aulas.");
 			$this->queryAulas = $queryAulas;
+
+			$this->debug['teste'] = $queryAulas->fetch_object();
 
 		}
 		
@@ -240,7 +241,6 @@
 				endif;
 
 				/* se o módulo já foi iniciado */
-				$this->debug[$aula->CodModulo] = $aula;
 				if($aula->Apurado):
 					if(gettype($aula->falta) != 'NULL'):
 						$modulos[$aula->CodModulo]->faltas++;
