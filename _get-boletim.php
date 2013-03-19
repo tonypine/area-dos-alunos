@@ -1,35 +1,30 @@
 <?php
 
+	/* load get variables */
 	import_request_variables('g');
 	$_s = (object) $_s;
-	$gzfile = "cache/".$_s->ctr."/boletim-".$_s->ctr.".gz";
 
-	if (file_exists($gzfile) && (int) date("d", filemtime($gzfile)) == (int) date("d")):
-	    // echo "gzip was last modified: " . (int) date("d", filemtime($gzfile)) . "<br><br>";
-		@readgzfile($gzfile);
+	/* instantiate gzip class */
+	require_once 'php/_gzip.php';
+	$gzip = new gzip;
+	$gzip->dir = $_s->ctr;
+	$gzip->file = "cache/".$_s->ctr."/boletim-".$_s->ctr.".gz";
+
+	if (file_exists($gzip->file) && (int) date("d", filemtime($gzip->file)) == (int) date("d")):
+		@readgzfile($gzip->file);
 	else:
-		$loadFile = "../../../wp-load.php";
-		if (file_exists($loadFile))
-		    require_once($loadFile);
 
-		$output = ''; 
-		$output .= "<article class='excerpt-article'>";
-			$output .= "<header>";
-				$output .= "<h1>Boletim</h1>";
-				$output .= "<hr class='bottomLine'>";
-			$output .= "</header>";
+		$gzip->content = ''; 
+		$gzip->content .= "<article class='excerpt-article'>";
 
-			$q = new WP_Query( array(
-					'post_type'		=> 'page',
-					'pagename'		=> 'boletim'
-				) );
+			/* cURL */
+			require_once 'php/_curl.php';
+			$cURL = new cURL(array(
+					'url' 		=> $url . "/_model-page-content.php",
+					'data'		=> array( "slug" => 'boletim' ) ));
+			$gzip->content .= $cURL->exec();
 
-			while($q->have_posts()): $q->the_post();
-				$output .= "<p>";
-				$output .= get_the_content();
-				$output .= "</p>";
-			endwhile;
-
+			/* init aluno class */
 			require_once 'php/aluno.class.php';
 			$aluno = new aluno($_s->codUnidade, $_s->codCurso, $_s->ctr);
 			$aluno->getAluno();
@@ -38,7 +33,7 @@
 			/* --------------------- */
 			/* Table of notes
 			/* ------------------- */
-			$output .= '<table id="listaNotas">';
+			$gzip->content .= '<table id="listaNotas">';
 			foreach($aluno->modulos as $key => $m):
 				if($m->nota):
 					if($m->nota > 7):
@@ -51,22 +46,15 @@
 					$class = '';
 					$nota = "--";
 				endif;
-				$output .= "<tr class='".$class."'>";
-				$output .= "<td class='nota'>".$nota."</td><td class='modulo'>".$m->descricao."</td>";
-				$output .= "</tr>";
+				$gzip->content .= "<tr class='".$class."'>";
+				$gzip->content .= "<td class='nota'>".$nota."</td><td class='modulo'>".$m->descricao."</td>";
+				$gzip->content .= "</tr>";
 			endforeach;
-			$output .= '</table>';
-		$output .= "</article>";
+			$gzip->content .= '</table>';
+		$gzip->content .= "</article>";
 
-		if(!is_dir("cache/".$_s->ctr."/"))
-			mkdir("cache/".$_s->ctr."/");
+		/* write gzip file */
+		$gzip->write();
+		echo $gzip->content;
 
-		$fp = gzopen($gzfile, 'w9');
-		gzwrite($fp, $output);
-		gzclose($fp);
-
-		echo $output;
-
-	endif;
-
-?>
+	endif; ?>

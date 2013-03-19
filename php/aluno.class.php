@@ -25,29 +25,29 @@
 		/* ==================================== */
 		/* Vars */
 		/* ================================== */
-		public $codUnidade 	= null;
-		public $codCurso 	= null;
-		public $ctr 		= null;
+		public $codUnidade ;
+		public $codCurso ;
+		public $ctr 	;
 		
-		public $info = null;		
+		public $info;		
 		public $aFields = Array(
 			'Nome as nome',
 			'CodTurma as codTurma',
 			'DataNascimento as dataNascimento'
 		);
 
-		public $modulos = null;		
+		public $modulos;		
 		public $modFields = Array(
 			'TAB00207.CodModulo AS codModulo', 
 			'TAB00212.Descricao AS descricao'
 		);
 
-		public $freq = null;
-		public $cron = null;
+		public $freq;
+		public $cron;
 
-		public $mysqli = null;
+		public $mysqli;
 		
-		public function __construct($codUnidade = null, $codCurso = null, $ctr = null) {
+		public function __construct($codUnidade, $codCurso, $ctr) {
 			if(!$codUnidade || !$codCurso || !$ctr)
 				return false;
 

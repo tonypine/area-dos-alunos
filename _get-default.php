@@ -1,8 +1,9 @@
+<?php 
 
-	<?php 
-
+    /* load get variables */
     import_request_variables('g');
 
+    /* load wp environment */
     $loadFile = "../../../wp-load.php";
     if (file_exists($loadFile))
         require_once($loadFile);
@@ -25,14 +26,13 @@
     require '_model-article-loop.php';
     require '_model-paginacao.php';
 
-
     /* ======================================== */
     /* Header */
     /* ====================================== */
 
     $output = '';
     $output .= "<header><h1>".$cat->name."</h1>";
-        $output .= $paginacao;
+        // $output .= $paginacao;
         $output .= "<hr class='bottomLine'>";
     $output .= "</header>";
 

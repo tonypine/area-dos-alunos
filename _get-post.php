@@ -1,7 +1,10 @@
 <?php
 
+	/* load get variables */
 	import_request_variables('g');
 	$_s = (object) $_s;
+
+	/* gzip file */	
 	$gzfile = "cache/posts/post-".$slug.".gz";
 
 	if (@file_exists($gzfile)):
@@ -22,10 +25,7 @@
 			
 			$output = $cURL->exec();
 
-		/* ======================================= */
-		/* # cURL */
-		/* ======================================= */
-
+		/* write gzip file */
 		if(!is_dir("cache/posts/"))
 			mkdir("cache/posts/");
 

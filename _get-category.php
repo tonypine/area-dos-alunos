@@ -36,7 +36,7 @@
 
 	$output .= "<header><h1>".$cat->name."</h1>";
 		$output .= "<p><strong>".$cat->count."</strong> posts publicados.</p>";
-		$output .= $paginacao;
+		// $output .= $paginacao;
 		$output .= "<hr class='bottomLine'>";
 	$output .= "</header>";
 

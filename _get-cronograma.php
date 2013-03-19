@@ -1,105 +1,78 @@
 <?php
 
+	/* load get variables */
 	import_request_variables('g');
 	$_s = (object) $_s;
-	$gzfile = "cache/".$_s->ctr."/cronograma-".$_s->ctr.".gz";
 
-	if (file_exists($gzfile) && (int) date("d", filemtime($gzfile)) == (int) date("d")):
-		@readgzfile($gzfile);
+	/* instantiate gzip class */
+	require_once 'php/_gzip.php';
+	$gzip = new gzip;
+	$gzip->dir = $_s->ctr;
+	$gzip->file = "cache/".$_s->ctr."/cronograma-".$_s->ctr.".gz";
+
+	if (file_exists($gzip->file) && (int) date("d", filemtime($gzip->file)) == (int) date("d")):
+		@readgzfile($gzip->file);
 	else:
-		$loadFile = "../../../wp-load.php";
-		if (file_exists($loadFile))
-		    require_once($loadFile);
 
-		$output = ''; 
-		$output .= "<article class='excerpt-article'>";
-			$output .= "<header>";
-				$output .= "<h1>Cronograma</h1>";
-				$output .= "<hr class='bottomLine'>";
-			$output .= "</header>";
+		$gzip->content = ''; 
+		$gzip->content .= "<article class='excerpt-article'>";
 
-			$q = new WP_Query( array(
-					'post_type'		=> 'page',
-					'pagename'		=> 'cronograma'
-				) );
+			/* cURL */
+			require_once 'php/_curl.php';
+			$cURL = new cURL(array(
+					'url' 		=> $url . "/_model-page-content.php",
+					'data'		=> array( "slug" => 'cronograma' ) ));
+			$gzip->content .= $cURL->exec();
 
-			while($q->have_posts()): $q->the_post();
-				$output .= "<p>";
-				$output .= get_the_content();
-				$output .= "</p>";
-			endwhile;
-
+			/* init aluno class */
 			require_once 'php/aluno.class.php';
-
 			$aluno = new aluno($_s->codUnidade, $_s->codCurso, $_s->ctr);
 			$aluno->getAluno();
 			$aluno->doQueryAulas();
 			$aluno->setupCronogram(); 
 
 			/* =========================================== */
-			/* Query Teste */
-			/* =========================================== */
-
-			/*$qTest = $aluno->mysqli->query("SELECT *
-								FROM 
-									TAB00208 a
-								LIMIT 0,1");
-
-			while(!$q = $qTest->fetch_object()):
-				foreach ($q as $key => $v):
-					echo $key." => ";
-					var_dump($v);
-					echo "<br>";
-				endforeach;
-			endwhile; */
-
-			/* =========================================== */
 			/* Porcentagem de faltas por módulo */
 			/* =========================================== */
 
-			$output .= "<ul>";
+			$gzip->content .= "<ul>";
 
 			foreach ($aluno->cron as $key => $m):
 				
-				$output .= "<li class='". $liModClass ."'>";
-					$output .= "<h4>". $m->name ."</h4>";
-					$output .= "<table id='listaFaltas'>";
-						$output .= "<thead>";
-							$output .= "<tr>";
-								$output .= "<td>Data</td>";
-								$output .= "<td>Descrição</td>";
-							$output .= "</tr>";
-						$output .= "</thead>";
-						$output .= "<tbody>";
+				$gzip->content .= "<li class=''>";
+					$gzip->content .= "<h4>". $m->name ."</h4>";
+					$gzip->content .= "<table id='listaFaltas'>";
+						$gzip->content .= "<thead>";
+							$gzip->content .= "<tr>";
+								$gzip->content .= "<td>Data</td>";
+								$gzip->content .= "<td>Descrição</td>";
+							$gzip->content .= "</tr>";
+						$gzip->content .= "</thead>";
+						$gzip->content .= "<tbody>";
 
 							foreach ($m->aulas as $key => $a):
 
 								$presenca = "falta";	
 								if($a->presenca)
 									$presenca = "presente";
-								$output .= "<tr class='".$presenca."'>";
-								$output .= "<td class='data'>".$a->data."</td>";
-								$output .= "<td class='desc'>".$a->descricao."</td>";
-								$output .= "</tr>";
+								$gzip->content .= "<tr class='".$presenca."'>";
+								$gzip->content .= "<td class='data'>".$a->data."</td>";
+								$gzip->content .= "<td class='desc'>".$a->descricao."</td>";
+								$gzip->content .= "</tr>";
 								
 							endforeach;
 
-						$output .= "</tbody>";
-					$output .= "</table>";
-				 $output .= "</li>";
+						$gzip->content .= "</tbody>";
+					$gzip->content .= "</table>";
+				 $gzip->content .= "</li>";
 
 			endforeach;
 
-			$output .= "</ul>";
-		$output .= "</article>";
+			$gzip->content .= "</ul>";
+		$gzip->content .= "</article>";
 
-		if(!is_dir("cache/".$_s->ctr."/"))
-			mkdir("cache/".$_s->ctr."/");
-
-		$fp = gzopen($gzfile, 'w9');
-		gzwrite($fp, $output);
-		gzclose($fp);
-
-		echo $output;
+		/* write gzip file */
+		$gzip->write();
+		echo $gzip->content;
 
 	endif;

@@ -1,33 +1,24 @@
 <?php
 
+	/* load get variables */
 	import_request_variables('g');
 	$_s = (object) $_s;
+
+	/* gzip file */	
 	$gzfile = "cache/pages/p-contato.gz";
 
 	if (!file_exists($gzfile)):
 		@readgzfile($gzfile);
 	else:
 
-		/* ======================================= */
 		/* cURL */
-		/* ======================================= */
+		require_once 'php/_curl.php';
+		$cURL = new cURL(array(
+				'url' 		=> $url . "/_model-page-contato.php",
+				'data'		=> array( "slug" => $hash ) ));
+		$output = $cURL->exec();
 
-			require_once 'php/_curl.php';
-
-			$output = '';
-			$cURL = new cURL(array(
-					'url' 		=> $url . "/_model-page-contato.php",
-					'data'		=> array( "slug" => $hash )
-				));
-			
-			$output = $cURL->exec();
-
-		/* ======================================= */
-		/* # cURL */
-		/* ======================================= */
-
-		// $url = get_bloginfo('wpurl');
-
+		/* write gzip file */
 		if(!is_dir("cache/pages/"))
 			mkdir("cache/pages/");
 
