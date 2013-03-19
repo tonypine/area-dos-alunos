@@ -240,8 +240,8 @@
 				endif;
 
 				/* se o módulo já foi iniciado */
+				$this->debug[$aula->CodModulo] = $aula;
 				if($aula->Apurado):
-					$this->debug[$aula->CodModulo] = $aula->Apurado;
 					if(gettype($aula->falta) != 'NULL'):
 						$modulos[$aula->CodModulo]->faltas++;
 						$this->freq->totalFaltas++;
