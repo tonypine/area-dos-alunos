@@ -182,7 +182,7 @@
 						m.Modulo as modulo,
 						a.DataAula,
 						f.DataFalta as falta, 
-						a.Apurado,
+						Case a.Apurado when 1 then '1' when 0 then '0' end as Apurado,
 						a.ResumoMateria as resumo,
 						a.PrevisaoMateria,
 						f.CTR as ctr
