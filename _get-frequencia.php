@@ -37,6 +37,10 @@
 			$aluno->doQueryAulas();
 			$aluno->getFrequency();	
 
+			echo "<pre>";
+			var_dump( $aluno->debug );
+			echo "</pre>";
+
 			/* =========================================== */
 			/* Frequência no curso todo */
 			/* =========================================== */

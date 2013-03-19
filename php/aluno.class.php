@@ -46,6 +46,8 @@
 		public $cron;
 
 		public $mysqli;
+
+		public $debug = array();
 		
 		public function __construct($codUnidade, $codCurso, $ctr) {
 			if(!$codUnidade || !$codCurso || !$ctr)
@@ -239,7 +241,7 @@
 
 				/* se o módulo já foi iniciado */
 				if($aula->Apurado):
-
+					$this->debug[$aula->CodModulo] = utf8_encode( formatText($aula->modulo) );
 					if(gettype($aula->falta) != 'NULL'):
 						$modulos[$aula->CodModulo]->faltas++;
 						$this->freq->totalFaltas++;
