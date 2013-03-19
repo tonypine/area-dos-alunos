@@ -10,7 +10,7 @@
 	$gzip->dir = $_s->ctr;
 	$gzip->file = "cache/".$_s->ctr."/frequencia-".$_s->ctr.".gz";
 
-	if (!file_exists($gzip->file) && (int) date("d", filemtime($gzip->file)) == (int) date("d")):
+	if (file_exists($gzip->file) && (int) date("d", filemtime($gzip->file)) == (int) date("d")):
 		@readgzfile($gzip->file);
 	else:
 
@@ -36,11 +36,7 @@
 			$aluno->getAluno();
 			$aluno->doQueryAulas();
 			$aluno->getFrequency();	
-
-			echo "<pre>";
-			var_dump( $aluno->debug );
-			echo "</pre>";
-
+			
 			/* =========================================== */
 			/* Frequência no curso todo */
 			/* =========================================== */

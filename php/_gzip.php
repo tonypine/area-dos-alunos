@@ -14,7 +14,11 @@
 		}
 
 		public function write() {
+
 			/* write gzip file */
+			if(!is_dir("cache/"))
+				mkdir("cache/");
+
 			if(!is_dir("cache/".$this->dir."/"))
 				mkdir("cache/".$this->dir."/");
 
